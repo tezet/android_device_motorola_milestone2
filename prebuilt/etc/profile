@@ -1,0 +1,7 @@
+[ -f /system/etc/banner ] && cat /system/etc/banner
+
+export TERM=linux
+
+alias l='ls -al'
+
+alias findinfiles='find . -type f | xargs grep -insI '

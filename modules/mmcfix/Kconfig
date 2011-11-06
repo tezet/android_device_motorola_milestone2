@@ -1,0 +1,4 @@
+config MMCFIX
+        tristate "SDCard fix"
+        default m
+
