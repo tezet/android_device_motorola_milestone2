@@ -2,7 +2,7 @@
 # It is the final build step (after OTA package)
 
 # Delete unwanted apps
-#rm -f $REPACK/ota/system/app/RomManager.apk
+rm -f $REPACK/ota/system/app/RomManager.apk
 rm -f $REPACK/ota/system/xbin/irssi
 
 mkdir -p $REPACK/ota/system/etc/terminfo/x

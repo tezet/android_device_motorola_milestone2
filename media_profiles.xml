@@ -22,7 +22,7 @@
                          AudioDecoderCap)>
 <!ELEMENT CamcorderProfiles (EncoderProfile+, ImageEncoding+, ImageDecoding, Camera)>
 <!ELEMENT EncoderProfile (Video, Audio)>
-<!ATTLIST EncoderProfile quality (wide|hd|high|low) #REQUIRED>
+<!ATTLIST EncoderProfile quality (high|low) #REQUIRED>
 <!ATTLIST EncoderProfile fileFormat (mp4|3gp) #REQUIRED>
 <!ATTLIST EncoderProfile duration (30|60) #REQUIRED>
 <!ELEMENT Video EMPTY>
@@ -79,7 +79,7 @@
     <!-- Each camcorder profile defines a set of predefined configuration parameters -->
     <CamcorderProfiles>
 
-        <EncoderProfile quality="wide" fileFormat="mp4" duration="30">
+        <EncoderProfile quality="high" fileFormat="mp4" duration="30">
             <Video codec="m4v"
                    bitRate="3500000"
                    width="848"
@@ -91,7 +91,7 @@
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
-
+<!--
         <EncoderProfile quality="hd" fileFormat="mp4" duration="60">
             <Video codec="m4v"
                    bitRate="10000000"
@@ -104,7 +104,8 @@
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
-
+-->
+<!-- 
         <EncoderProfile quality="high" fileFormat="mp4" duration="30">
             <Video codec="m4v"
                    bitRate="2000000"
@@ -117,7 +118,7 @@
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
-
+-->
         <EncoderProfile quality="low" fileFormat="3gp" duration="30">
             <Video codec="h263"
                    bitRate="200000"

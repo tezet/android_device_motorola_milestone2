@@ -126,7 +126,7 @@ sp<CameraHardwareInterface> JordanCameraWrapper::createInstance(int cameraId)
     } else if (deviceCardMatches("/dev/video0", "mt9p012")) {
         LOGI("Detected BAYER device\n");
         /* entry point of Bayer driver is android::CameraHal::createInstance() */
-        motoInterface = openMotoInterface("libmotocamera.so", "_ZN7android9CameraHal14createInstanceEv");
+        motoInterface = openMotoInterface("libbayercamera.so", "_ZN7android9CameraHal14createInstanceEv");
         type = CAM_BAYER;
     } else {
         LOGE("Camera type detection failed");

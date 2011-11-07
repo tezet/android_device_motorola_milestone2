@@ -110,11 +110,6 @@ PRODUCT_PACKAGES += \
 	libLCML \
 	libOMX_Core
 	
-#PRODUCT_PACKAGES += \
-    libOmxVidEnc \
-    libmm-omxcore
-	
-
 # for jpeg hw encoder/decoder
 # PRODUCT_PACKAGES += libskiahw libOMX.TI.JPEG.Encoder libOMX.TI.JPEG.decoder
 

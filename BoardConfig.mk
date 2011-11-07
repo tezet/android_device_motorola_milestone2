@@ -67,7 +67,6 @@ BOARD_SYSTEMIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x07500000)
 BOARD_USERDATAIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x04ac0000)
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-
 HARDWARE_OMX := true
 TARGET_USE_OMX_RECOVERY := true
 TARGET_USE_OMAP_COMPAT  := true
