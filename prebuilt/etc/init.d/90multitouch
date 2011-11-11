@@ -3,10 +3,10 @@
 # load multitouch module
 
 # Module location
-MODULE="/system/lib/modules/defy_more.ko"
+MODULE="/system/lib/modules/multitouch.ko"
 
 # Max number of fingers
-MAX_TOUCH=`getprop persist.sys.multitouch`
+MAX_TOUCH=`getprop persist.sys.qtouch_num`
 
 # Load the module if MAX_TOUCH > 2
 if [ -n "$MAX_TOUCH" ]; then

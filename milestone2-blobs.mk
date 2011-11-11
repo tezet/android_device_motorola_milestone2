@@ -15,13 +15,18 @@
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/prebuilt/usr/qwerty.kl:system/usr/keylayout/qwerty.kl \
 	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-azerty.kl:system/usr/keylayout/umts_milestone2-keypad-azerty.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/umts_milestone2-keypad-qwerty.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwertz.kl:system/usr/keylayout/umts_milestone2-keypad-qwertz.kl
 
 #etc
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	device/motorola/milestone2/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
+	device/motorola/milestone2/prebuilt/etc/init.d/02qwerty:system/etc/init.d/02qwerty \
 	device/motorola/milestone2/prebuilt/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
 	device/motorola/milestone2/prebuilt/etc/init.d/04mmcfix:system/etc/init.d/04mmcfix \
+	device/motorola/milestone2/prebuilt/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
 	device/motorola/milestone2/prebuilt/etc/profile:system/etc/profile \
 	device/motorola/milestone2/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf \
 	device/motorola/milestone2/prebuilt/etc/busybox.fstab:system/etc/fstab \
