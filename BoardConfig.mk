@@ -103,4 +103,3 @@ TARGET_CUSTOM_RELEASETOOL := ./device/motorola/milestone2/releasetools/squisher
 
 # Milestone2 need 2nd-init binary from motorola common
 TARGET_NEEDS_MOTOROLA_HIJACK := true
-

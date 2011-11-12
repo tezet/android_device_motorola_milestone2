@@ -36,6 +36,8 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/motorola/milestone2/prebuilt/etc/gpsconfig.xml:system/etc/gpsconfig.xml \
 	device/motorola/milestone2/prebuilt/etc/location.cfg:system/etc/location.cfg \
+	device/motorola/milestone2/prebuilt/etc/Droid2Bootstrap.cfg:system/etc/Droid2Bootstrap.cfg \
+	device/motorola/milestone2/prebuilt/etc/DroidXBootstrap.cfg:system/etc/DroidXBootstrap.cfg \
 	device/motorola/milestone2/media_profiles.xml:system/etc/media_profiles.xml \
 	device/motorola/milestone2/modules/modules.alias:system/lib/modules/modules.alias \
 	device/motorola/milestone2/modules/modules.dep:system/lib/modules/modules.dep
