@@ -152,7 +152,7 @@ set_overclock_table()
   echo "4 ${clk3}000000 $vsel3" > /proc/overclock/mpu_opps
   echo "3 ${clk2}000000 $vsel2" > /proc/overclock/mpu_opps
   echo "2 ${clk1}000000 $vsel1" > /proc/overclock/mpu_opps
-  echo "1 300000000 17" > /proc/overclock/mpu_opps 
+  echo "1 300000000 18" > /proc/overclock/mpu_opps 
   echo "0 ${clk3}000" > /proc/overclock/freq_table
   echo "1 ${clk2}000" > /proc/overclock/freq_table
   echo "2 ${clk1}000" > /proc/overclock/freq_table
