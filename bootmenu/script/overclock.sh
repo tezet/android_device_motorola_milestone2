@@ -15,7 +15,7 @@ SCALING_GOVERNOR="/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
 ##### Default Param
 # enable 1
 # load_all 1
-# scaling 0
+# scaling 2
 # clk1 300
 # clk2 600
 # clk3 800
