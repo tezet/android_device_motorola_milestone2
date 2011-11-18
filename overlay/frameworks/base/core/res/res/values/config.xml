@@ -102,7 +102,7 @@
          Note that this defaults to false so that if you move to a carrier that
          hasn't configured anything tethering will still work.  If you'd rather
          make the device untetherable on unconfigured devices, set to true -->
-    <bool translatable="false" name="config_tether_dun_required">true</bool>
+    <bool translatable="false" name="config_tether_dun_required">false</bool>
 
     <!-- String containing the apn value for tethering.  May be overriden by secure settings
          TETHER_DUN_APN.  Value is a comma separated series of strings:
@@ -328,7 +328,7 @@
     <string name="config_datause_iface">rmnet0</string>
  
     <!-- Import from sholes to get crt working -->   
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
  
     <!-- The default reduced-datarate notification mask -->
     <!-- 2 means give warning -->
