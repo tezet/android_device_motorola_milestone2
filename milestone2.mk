@@ -165,4 +165,3 @@ $(call inherit-product, build/target/product/full_base.mk)
 
 PRODUCT_NAME := generic_milestone2
 PRODUCT_DEVICE := A953
-

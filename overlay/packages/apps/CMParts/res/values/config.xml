@@ -8,5 +8,11 @@
 
     <!-- LED Flashlight -->
     <bool name="has_led_flash">true</bool>
+    
+    <!-- Whether or not to display the camera button settings -->
+    <bool name="has_camera_button">false</bool>
+  
+    <!-- Whether or not to display search button settings -->
+    <bool name="has_search_button">true</bool>
 
 </resources>

@@ -76,6 +76,9 @@ persist.sys.keylayout_alt=
 
 persist.sys.qtouch_num=2
 
+#disable Gmaps hack by default
+persist.sys.gmaps_hack=0
+
 
 # required for future java part (common omap3/4)
 #com.ti.omap_enhancement=1
