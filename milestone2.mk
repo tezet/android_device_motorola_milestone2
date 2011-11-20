@@ -92,7 +92,7 @@ PRODUCT_PACKAGES += \
 	libOMX.TI.VPP \
 	libVendor_ti_omx \
 	libLCML \
-	libOMX_Core
+	libOMX_Core \
 	sensors.milestone2 \
 	lights.milestone2 \
 	libcamera \
