@@ -15,7 +15,7 @@
 #
 
 #
-# This is the product configuration for a generic Motorola Defy (milestone2)
+# This is the product configuration for a generic Motorola Milestone 2 (milestone2)
 #
 
 # The gps config appropriate for this device
@@ -79,22 +79,6 @@ PRODUCT_PACKAGES += \
 	libCustomWifi \
 	wpa_supplicant.conf \
 	dhcpcd.conf \
-	lights.milestone2 \
-	sensors.milestone2 \
-	libaudiopolicy \
-	iwmulticall \
-	hostap \
-	hostapd.conf \
-	libhostapdcli \
-	bootmenu \
-	hijack_boot_2nd-init \
-	Usb \
-	su
-	
-PRODUCT_PACKAGES += \
-	libcamera
-			
-PRODUCT_PACKAGES += \
 	libOMX.TI.AAC.encode \
 	libOMX.TI.AAC.decode \
 	libOMX.TI.AMR.decode \
@@ -109,6 +93,18 @@ PRODUCT_PACKAGES += \
 	libVendor_ti_omx \
 	libLCML \
 	libOMX_Core
+	sensors.milestone2 \
+	lights.milestone2 \
+	libcamera \
+	libaudiopolicy \
+	iwmulticall \
+	hostap \
+	hostapd.conf \
+	libhostapdcli \
+	bootmenu \
+	hijack_boot_2nd-init \
+	Usb \
+	su
 	
 # for jpeg hw encoder/decoder
 PRODUCT_PACKAGES += libskiahw libOMX.TI.JPEG.Encoder libOMX.TI.JPEG.decoder
@@ -162,6 +158,9 @@ PRODUCT_COPY_FILES += \
 
 
 $(call inherit-product, build/target/product/full_base.mk)
+
+# Should be after the full_base include, which loads languages_full
+PRODUCT_LOCALES += hdpi
 
 PRODUCT_NAME := generic_milestone2
 PRODUCT_DEVICE := A953
