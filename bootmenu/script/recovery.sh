@@ -77,14 +77,16 @@ fi
 
 #############################
 ## mount in /sbin/postrecoveryboot.sh
-umount -l /system
-umount -l /data
-umount -l /cache
+umount /system
+umount /data
+umount /cache
 #############################
 
 # turn on button backlight (back button is used in CWM Recovery 3.x)
 echo 1 > /sys/class/leds/button-backlight/brightness
 
 /sbin/recovery
+
+sync
 
 exit
