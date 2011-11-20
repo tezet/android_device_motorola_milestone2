@@ -15,10 +15,10 @@ done
 
 mount -o remount,rw rootfs /
 rm -r /tmp
-mkdir -p tmp
+mkdir -p /tmp
 touch /tmp/recovery.log
-rm sdcard
-mkdir sdcard
+rm /sdcard
+mkdir /sdcard
 
 
 ## ???
