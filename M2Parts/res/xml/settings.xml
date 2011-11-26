@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:key="general"
+                        android:title="@string/general_settings_title">
+                        
+        <!-- Keypad type -->
+        <ListPreference android:key="keypad_type"
+                        android:persistent="false"
+                        android:title="@string/keypad_type_title"
+                        android:summary="@string/keypad_type_summary"
+                        android:entries="@array/keypad_type_entries"
+                        android:entryValues="@array/keypad_type_values" />
+
+        <!-- Charge LED mode -->
+        <ListPreference android:key="charge_led_mode"
+                        android:persistent="false"
+                        android:title="@string/charge_led_mode_title"
+                        android:summary="@string/charge_led_mode_summary"
+                        android:entries="@array/charge_led_mode_entries"
+                        android:entryValues="@array/charge_led_mode_values" />
+
+        <!-- Button brightness scaling 
+        <com.cyanogenmod.m2parts.BrightnessPreference
+                android:key="button_brightness_scale"
+                android:persistent="false"
+                android:title="@string/button_brightness_scale_title"
+                android:dialogTitle="@string/button_brightness_scale_title"
+                android:summary="@string/button_brightness_scale_summary" />
+                -->
+
+        <!-- Number of multitouch points -->
+        <ListPreference android:key="touch_points"
+                        android:persistent="false"
+                        android:title="@string/touch_points_title"
+                        android:summary="@string/touch_points_summary"
+                        android:entries="@array/touch_point_entries"
+                        android:entryValues="@array/touch_point_values" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/audio_settings_title">
+
+        <PreferenceScreen android:key="audio_effects"
+                          android:title="@string/audio_effects">
+                          <intent
+                             android:action="android.intent.action.MAIN"
+                             android:targetPackage="com.bel.android.dspmanager"
+                             android:targetClass="com.bel.android.dspmanager.activity.DSPManager" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/other_settings_title">
+        <PreferenceScreen android:key="compass_calibrate"
+                          android:title="@string/compass_calibrate">
+                          <intent
+                             android:action="android.intent.action.MAIN"
+                             android:targetPackage="com.motorola.CompassCalibrate"
+                             android:targetClass="com.motorola.CompassCalibrate.CompassCalibrate" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>

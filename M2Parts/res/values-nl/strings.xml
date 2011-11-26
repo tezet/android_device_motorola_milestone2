@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Milestone2 instellingen</string>
+
+    <string name="general_settings_title">Algemene instellingen</string>
+
+    <string name="charge_led_mode_title">LED bij opladen</string>
+    <string name="charge_led_mode_summary">Pas het gedrag aan van de notificatie LED tijdens het opladen</string>
+    <string name="charge_led_mode_white">Witte LED</string>
+    <string name="charge_led_mode_rgb">Gemengde LED (rood/groen)</string>
+    <string name="charge_led_mode_off">Geen</string>
+
+    <string name="touch_points_title">Multi-touch</string>
+    <string name="touch_points_summary">Pas het aantal multi-touch punten aan die het systeem registreert</string>
+    <string name="touch_point_entry_2points">2 punten (standaard)</string>
+    <string name="touch_point_entry_3points">3 punten</string>
+    <string name="touch_point_entry_4points">4 punten</string>
+    <string name="touch_point_entry_5points">5 punten</string>
+    <string name="touch_point_entry_8points">8 punten</string>
+
+    <string name="touch_point_warning_title">Waarschuwing</string>
+    <string name="touch_point_warning_message">Het aantal touch punten verhogen kan de reactiesnelheid van het scherm verlagen.\nBen je zeker dat je deze instelling wilt wijzigen?</string>
+
+    <string name="audio_settings_title">Audio instellingen</string>
+    <string name="audio_effects">Audio effecten en DSP</string>
+
+    <string name="other_settings_title">Andere instellingen</string>
+    <string name="compass_calibrate">Kalibreer Kompas</string>
+
+</resources>
+

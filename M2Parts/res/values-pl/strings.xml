@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ustawienia urządzenia</string>
+
+    <string name="general_settings_title">Ustawienia ogólne</string>
+
+    <string name="keypad_type_title">Układ klawiatury</string>
+    <string name="keypad_type_summary">Wybierz układ klawiatury (wymaga restartu)</string>
+    <string name="keypad_type_qwerty">QWERTY</string>
+    <string name="keypad_type_qwertz">QWERTZ</string>
+    <string name="keypad_type_azerty">AZERTY</string>
+    
+    <string name="keypad_type_warning_title">Uwaga</string>
+    <string name="keypad_type_warning_message">Telefon wymaga ponownego uruchomienia aby zatwierdzić zmiany.\nJesteś pweien?</string>
+    
+    <string name="charge_led_mode_title">Dostosowanie diody LED</string>
+    <string name="charge_led_mode_summary">Ustawienia diody LED podczas ładowania</string>
+    <string name="charge_led_mode_white">Biała LED</string>
+    <string name="charge_led_mode_rgb">Mix LED (czerwony/zielony)</string>
+    <string name="charge_led_mode_off">Brak</string>
+
+    <string name="touch_points_title">Multitouch</string>
+    <string name="touch_points_summary">Ustawienia punktów multitouch na ekranie (wymaga restartu)</string>
+    <string name="touch_point_entry_2points">2 punkty (domyślnie)</string>
+    <string name="touch_point_entry_3points">3 punkty</string>
+    <string name="touch_point_entry_4points">4 punkty</string>
+    <string name="touch_point_entry_5points">5 punktów</string>
+    <string name="touch_point_entry_8points">8 punktów</string>
+
+    <string name="touch_point_warning_title">UWAGA</string>
+    <string name="touch_point_warning_message">Zwiększenie liczby punktów może pogorszyć reakcje ekranu. Czy na pewno chcesz zmienić ustawienia?</string>
+
+    <string name="audio_settings_title">Ustawienia audio</string>
+    <string name="audio_effects">Efekty audio i DSP</string>
+
+    <string name="other_settings_title">Inne ustawienia</string>
+    <string name="compass_calibrate">Kalibracja kompasu</string>
+
+</resources>

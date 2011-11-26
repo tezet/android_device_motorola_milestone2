@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Milestone2 Settings</string>
+
+    <string name="general_settings_title">General Settings</string>
+
+    <string name="keypad_type_title">Keypad type</string>
+    <string name="keypad_type_summary">Select keypad type (needs restart)</string>
+    <string name="keypad_type_qwerty">QWERTY</string>
+    <string name="keypad_type_qwertz">QWERTZ</string>
+    <string name="keypad_type_azerty">AZERTY</string>
+    
+    <string name="keypad_type_warning_title">Warning</string>
+    <string name="keypad_type_warning_message">The phone must be restarted for changes to take effect.\nAre you sure you want to change the setting?</string>
+    
+    <string name="charge_led_mode_title">Charge LED mode</string>
+    <string name="charge_led_mode_summary">Adjust the behavior of the notification LED during charging</string>
+    <string name="charge_led_mode_white">White LED</string>
+    <string name="charge_led_mode_rgb">Mixed LED (red/green)</string>
+    <string name="charge_led_mode_off">Off</string>
+
+    <string name="button_brightness_scale_title">Button brightness</string>
+    <string name="button_brightness_scale_summary">Allows reducing the button brightness, especially useful when using manual brightness</string>
+
+    <string name="touch_points_title">Multi-touch points</string>
+    <string name="touch_points_summary">Adjust the number of multi-touch points registered by the system  (needs restart)</string>
+    <string name="touch_point_entry_2points">2 points (default)</string>
+    <string name="touch_point_entry_3points">3 points</string>
+    <string name="touch_point_entry_4points">4 points</string>
+    <string name="touch_point_entry_5points">5 points</string>
+    <string name="touch_point_entry_8points">8 points</string>
+
+    <string name="touch_point_warning_title">Warning</string>
+    <string name="touch_point_warning_message">Increasing the number of touch points may degrade the responsiveness of the touch screen.\nAre you sure you want to change the setting?</string>
+
+    <string name="audio_settings_title">Audio Settings</string>
+    <string name="audio_effects">Audio Effects and DSP</string>
+
+    <string name="other_settings_title">Other settings</string>
+    <string name="compass_calibrate">Compass calibrator</string>
+
+</resources>
