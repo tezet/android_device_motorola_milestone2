@@ -103,6 +103,7 @@ PRODUCT_PACKAGES += \
 	libhostapdcli \
 	bootmenu \
 	hijack_boot_2nd-init \
+	M2Parts \
 	Usb \
 	su
 	

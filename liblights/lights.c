@@ -48,13 +48,16 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 static struct light_state_t g_battery;
 static struct light_state_t g_notification;
-static int g_charge_led_mode;
 static int g_charge_led_active;
+static int g_last_button_brightness;
+
 
 char const*const LCD_FILE = "/sys/class/leds/lcd-backlight/brightness";
 char const*const ALS_FILE = "/sys/class/leds/lcd-backlight/als";
 char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
 char const*const KEYBOARD_FILE = "/sys/class/leds/keyboard-backlight/brightness";
+char const*const BUTTON_BRIGHT_FILE = "/proc/backlight/brightness";
+
 
 /* RGB file descriptors */
 char const*const RED_LED_FILE = "/sys/class/leds/red/brightness";
@@ -65,24 +68,14 @@ char const*const CHARGE_LED_FILE = "/sys/class/leds/usb/brightness";
 
 void init_globals(void)
 {
-    char prop[PROPERTY_VALUE_MAX];
-
     // init the mutex
     pthread_mutex_init(&g_lock, NULL);
     memset(&g_battery, 0, sizeof(g_battery));
     memset(&g_notification, 0, sizeof(g_notification));
 
-    property_get("persist.sys.charge_led", prop, "rgb");
-    if (strcmp(prop, "white") == 0) {
-        g_charge_led_mode = CHARGE_LED_WHITE;
-    } else if (strcmp(prop, "rgb") == 0) {
-        g_charge_led_mode = CHARGE_LED_RGB;
-    } else {
-        g_charge_led_mode = CHARGE_LED_OFF;
-    }
-    LOGD("Got charge mode property value %s, mode is %d", prop, g_charge_led_mode);
-
     g_charge_led_active = 0;
+    g_last_button_brightness = -1;
+
 }
 
 static int
@@ -172,8 +165,34 @@ set_light_buttons(struct light_device_t* dev,
     int err = 0;
     int brightness = rgb_to_brightness(state);
 
+    if (brightness > 0) {
+        char prop[PROPERTY_VALUE_MAX];
+
+        if (property_get("persist.sys.button_brightness", prop, NULL)) {
+            int button_brightness_scale = atoi(prop);
+            if (button_brightness_scale == 0) {
+                brightness = 0;
+            } else if (button_brightness_scale != 100) {
+                brightness = (brightness * button_brightness_scale + 50) / 100;
+            }
+        }
+    }
+
     pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_FILE, brightness);
+
+    if (g_last_button_brightness < 0 ||
+        (g_last_button_brightness == 0 && brightness > 0) ||
+        (g_last_button_brightness > 0 && brightness == 0))
+    {
+        err = write_int(BUTTON_FILE, brightness ? 1 : 0);
+    }
+
+    if (err == 0 && brightness > 0 && brightness != g_last_button_brightness) {
+        err = write_int(BUTTON_BRIGHT_FILE, brightness);
+    }
+
+    g_last_button_brightness = brightness;
+
     pthread_mutex_unlock(&g_lock);
 
     return err;
@@ -237,11 +256,14 @@ set_light_battery(struct light_device_t* dev,
     /* if green is set, it means the device is charging -> only
      * use it if the user wants it */
     if (state->color & 0xff00) {
-        if (state->color & 0xff0000 && g_charge_led_mode == CHARGE_LED_WHITE) {
+        char prop[PROPERTY_VALUE_MAX];
+
+        property_get("persist.sys.charge_led", prop, "rgb");
+        if (state->color & 0xff0000 && !strcmp(prop, "white")) {
             /* not pure green -> charging -> use charge LED */
             g_charge_led_active = 1;
         }
-        if (g_charge_led_active || g_charge_led_mode == CHARGE_LED_OFF) {
+        if (g_charge_led_active || !strcmp(prop, "off")) {
             memset(&g_battery, 0, sizeof(g_battery));
         }
     }
@@ -251,6 +273,7 @@ set_light_battery(struct light_device_t* dev,
 
     return 0;
 }
+
 
 static int
 set_light_notification(struct light_device_t* dev,
@@ -336,7 +359,7 @@ const struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "Jordan lights Module",
-    .author = "Google, Inc.",
+    .name = "Milestone2 lights Module",
+    .author = "CyanogenMilestone2, AOSP, Google",
     .methods = &lights_module_methods,
 };

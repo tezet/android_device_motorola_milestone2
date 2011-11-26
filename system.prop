@@ -53,7 +53,7 @@ persist.sys.charge_led=off
 ro.usb.use_custom_service=1
 
 # use 1% battery steps
-ro.product.use_charge_counter=1
+#ro.product.use_charge_counter=1
 
 # use default multitouch configuration
 ro.product.multi_touch_enabled=true
@@ -64,21 +64,8 @@ ro.sys.keypad_prefix=umts_milestone2-keypad-
 # primary keycharmap
 persist.sys.keypad_type=qwerty
 
-# secondary keycharmap
-persist.sys.keypad_type_sec=none
-
-# max interval for key multipress (ms)
-persist.sys.keypad_multipress_t=500
-
-# alternative keylayout
-# (for russian phones - swapped 'search' and 'lang/menu' buttons)
-persist.sys.keylayout_alt=
-
+#number of multitouch points
 persist.sys.qtouch_num=2
-
-#disable Gmaps hack by default
-persist.sys.gmaps_hack=0
-
 
 # required for future java part (common omap3/4)
 #com.ti.omap_enhancement=1

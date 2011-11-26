@@ -1,6 +1,9 @@
 symsearch.ko:
 usbled.ko: symsearch.ko
 mmcfix.ko: symsearch.ko
+backlight.ko: symsearch.ko
+gpiofix.ko: symsearch.ko
+qtouch_num.ko: symsearch.ko
 wl127x_test.ko:
 vpnclient.ko:
 tun.ko:
@@ -25,4 +28,8 @@ cifs.ko: nls_utf8.ko
 act_police.ko:
 act_mirred.ko:
 act_gact.ko:
-multitouch.ko:
+cpufreq_stats.ko:
+cpufreq_smartass.ko: symsearch.ko
+cpufreq_interactive.ko: symsearch.ko cpufreq_stats.ko
+cpufreq_conservative.ko:
+debounce.ko:
