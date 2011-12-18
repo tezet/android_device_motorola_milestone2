@@ -28,18 +28,18 @@ $(call inherit-product-if-exists, vendor/motorola/milestone2/milestone2-vendor.m
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.media.capture.maxres=5m \
-    ro.media.capture.fast.fps=4 \
-    ro.media.capture.slow.fps=60 \
-    ro.media.capture.flash=led \
-    ro.media.capture.classification=classE \
-    ro.media.capture.useDFR=1 \
-    ro.media.capture.torchIntensity=45 \
-    ro.media.camera.focal=3564.0,3564.0 \
-    ro.media.camera.principal=1632.0,1224.0 \
-    ro.media.camera.skew=0.0 \
-    ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
-    ro.media.camera.calresolution=3264,2448 \
+	ro.media.capture.maxres=5m \
+	ro.media.capture.fast.fps=4 \
+	ro.media.capture.slow.fps=60 \
+	ro.media.capture.flash=led \
+	ro.media.capture.classification=classE \
+	ro.media.capture.useDFR=1 \
+	ro.media.capture.torchIntensity=45 \
+	ro.media.camera.focal=3564.0,3564.0 \
+	ro.media.camera.principal=1632.0,1224.0 \
+	ro.media.camera.skew=0.0 \
+	ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
+	ro.media.camera.calresolution=3264,2448 \
 	ro.com.google.locationfeatures=1 \
 	ro.telephony.call_ring.multiple=false \
 	ro.telephony.call_ring.delay=3000 \
@@ -50,7 +50,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.lockprof.threshold=500 \
 	ro.kernel.android.checkjni=0 \
 	dalvik.vm.dexopt-data-only=1 \
-
+	ro.vold.umsdirtyratio=20
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/milestone2/overlay
 
@@ -65,14 +65,29 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
 	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 
+# ICS sound
+PRODUCT_PACKAGES += \
+	hcitool \
+	libaudioutils audio.a2dp.default audio_policy.milestone2 \
+	libaudiohw_legacy audio.primary.omap3
+
+# ICS graphics
+PRODUCT_PACKAGES += libGLESv2 libEGL libGLESv1_CM
+
+# TO FIX for ICS
+PRODUCT_PACKAGES += gralloc.default hwcomposer.default
+
+# ICS Camera
+PRODUCT_PACKAGES += Camera overlay.omap3 camera.milestone2 libcamera libui
+
+#Common packages (gingerbread/ics)
 PRODUCT_PACKAGES += \
 	librs_jni \
 	tiwlan.ini \
 	dspexec \
 	libbridge \
-	overlay.omap3 \
 	wlan_cu \
 	libtiOsLib \
 	wlan_loader \
@@ -95,35 +110,38 @@ PRODUCT_PACKAGES += \
 	libOMX_Core \
 	sensors.milestone2 \
 	lights.milestone2 \
-	libcamera \
-	libaudiopolicy \
+	libfnc \
 	iwmulticall \
 	hostap \
 	hostapd.conf \
 	libhostapdcli \
 	bootmenu \
+	static_busybox \
 	hijack_boot_2nd-init \
-	M2Parts \
 	Usb \
-	su
-	
+	ssh \
+	Superuser \
+	su \
+	M2Parts
+
+PRODUCT_PACKAGES += \
+	qwerty.kcm
+
 # for jpeg hw encoder/decoder
 PRODUCT_PACKAGES += libskiahw libOMX.TI.JPEG.Encoder libOMX.TI.JPEG.decoder
 
+
 # Add DroidSSHd (dropbear) Management App - tpruvot/android_external_droidsshd @ github
-PRODUCT_PACKAGES += DroidSSHd
+PRODUCT_PACKAGES += DroidSSHd dropbear dropbearkey
+
+
+# CM9 apps
+PRODUCT_PACKAGES += AndroidTerm FileManager Torch
+PRODUCT_PACKAGES += DSPManager libcyanogen-dsp
+
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Set en_US as default locale
-PRODUCT_LOCALES := en_US
-
-# Screen density is actually considered a locale (since it is taken into account
-# the the build-time selection of resources). The product definitions including
-# this file must pay attention to the fact that the first entry in the final
-# PRODUCT_LOCALES expansion must not be a density.
-PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/vold.fstab:system/etc/vold.fstab
@@ -158,10 +176,19 @@ PRODUCT_COPY_FILES += \
         packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
 
+# ICS USB Packages
+PRODUCT_PACKAGES += com.android.future.usb.accessory
+
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+
+
 $(call inherit-product, build/target/product/full_base.mk)
 
 # Should be after the full_base include, which loads languages_full
 PRODUCT_LOCALES += hdpi
 
-PRODUCT_NAME := generic_milestone2
+PRODUCT_NAME := full_milestone2
 PRODUCT_DEVICE := A953
+    

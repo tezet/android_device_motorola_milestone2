@@ -27,6 +27,8 @@
 USE_CAMERA_STUB := false
 BOARD_USES_GENERIC_AUDIO := false
 
+TARGET_NO_RECOVERY := false
+TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_PREINSTALL := true
 TARGET_BOOTLOADER_BOARD_NAME := milestone2
@@ -36,10 +38,13 @@ TARGET_BOARD_PLATFORM := omap3
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a8
+TARGET_ARCH_VARIANT_FPU := neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8
 TARGET_OMAP3 := true
 COMMON_GLOBAL_CFLAGS += -DTARGET_OMAP3 -DOMAP_COMPAT -DMOTOROLA_UIDS
+ARCH_ARM_HAVE_TLS_REGISTER := false
 
 
 # Wifi related defines
@@ -58,9 +63,10 @@ WPA_SUPPL_APPROX_USE_RSSI   := true
 
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 BOARD_EGL_CFG := device/motorola/milestone2/egl.cfg
+DEFAULT_FB_NUM := 0
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/milestone2/UsbController.cpp
-
 BOARD_HAVE_BLUETOOTH := true
+BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
 BOARD_BOOTIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00280000)
 BOARD_RECOVERYIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00500000)
@@ -77,11 +83,14 @@ BUILD_PV_VIDEO_ENCODERS := 1
 BOARD_CAMERA_LIBRARIES := libcamera
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_NO_RGBX_8888 := true
+BOARD_USE_KINETO_COMPATIBILITY := true
+
 
 # Changes related to bootmenu
 BOARD_USES_BOOTMENU := true
 
 # Recovery
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/milestone2/recovery_ui.c
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_IGNORE_BOOTABLES := true
@@ -95,6 +104,11 @@ BOARD_SDEXT_DEVICE  := /dev/block/mmcblk0p2
 BOARD_SYSTEM_DEVICE := /dev/block/mmcblk1p21
 BOARD_DATA_DEVICE   := /dev/block/mmcblk1p26
 
+# Reboot mode for reboot menu, but only handle recovery, not bootmenu :(
+TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
+TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
+
+
 BOARD_NEVER_UMOUNT_SYSTEM := true
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
@@ -104,3 +118,30 @@ TARGET_CUSTOM_RELEASETOOL := ./device/motorola/milestone2/releasetools/squisher
 
 # Milestone2 need 2nd-init binary from motorola common
 TARGET_NEEDS_MOTOROLA_HIJACK := true
+
+BOARD_USE_CID_ROTATE_34 := true
+
+BOARD_USES_OVERLAY := true
+#USE_OPENGL_RENDERER := true
+#BOARD_USES_HGL := true
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext3
+TARGET_USERIMAGES_USE_EXT4 := false
+
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
+
+
+# CM9
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/milestone2/recovery_keys.c
+
+#ENABLE_SENSORS_COMPAT := true
+TARGET_PROXIMITY_SENSOR_LIMIT := 0x1F
+
+BOARD_USES_AUDIO_LEGACY := true
+BOARD_USE_LEGACY_TOUCHSCREEN := true
+
+TARGET_PROVIDES_LIBAUDIO := true
+BOARD_USES_GPSSHIM := false
+
+
+#BOARD_CUSTOM_GRAPHICS := ../../../device/motorola/milestone2/graphics.c
+

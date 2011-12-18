@@ -1,45 +1,23 @@
-CyanogenMod 7.1 for Motorola Milestone2 (Android 2.3.7 AOSP)
+CyanogenMod 9 for Motorola Milestone2 (Android 4.0.3 AOSP)
 
 
 Download:
 =========
-
-repo init -u git://github.com/tezet/android.git -b gingerbread
-
+repo init -u git://github.com/tezet/android.git -b ics
 repo sync
-
 
 Download RomManager:
 ====================
-
-mkdir vendor/cyanogen/proprietary
-cd vendor/cyanogen && ./get-rommanager
-
+cd vendor/cm && ./get-prebuilts
 
 Build:
 ======
-
-optional :
-    export PLATFORM_DIR=$(pwd)
-    export ARCH=arm
-    export CROSS_COMPILE=arm-eabi-
-    export TARGET_OUT_INTERMEDIATES=out
-    export JAVA_HOME=/usr/lib/jvm/java-6-sun
-    export BOARD_USES_QCOM_HARDWARE=true
-    export PATH=$PLATFORM_DIR/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin:$JAVA_HOME/bin:$PATH
-    cd $PLATFORM_DIR
-
     export CYANOGEN_NIGHTLY=true
+    export CYANOGEN_RELEASE=true
 
 rm -rf out/target
 
-. build/envsetup.sh 
+source build/envsetup.sh
+brunch milestone2 -j`sysctl -an hw.logicalcpu`
 
-brunch milestone2
-
-or...
-
-lunch cyanogen_milestone2-eng
-mka bacon
-
-Use the signed zip to update with Second Init recovery, or CM7 bootmenu recovery, not the ota package
+Use the signed zip to update with Second Init recovery, or CM bootmenu recovery, not the ota package

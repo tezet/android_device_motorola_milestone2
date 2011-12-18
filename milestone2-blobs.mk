@@ -13,19 +13,35 @@
 # limitations under the License.
 
 PRODUCT_COPY_FILES += \
-	device/motorola/milestone2/prebuilt/usr/qwerty.kl:system/usr/keylayout/qwerty.kl \
-	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-azerty.kl:system/usr/keylayout/umts_milestone2-keypad-azerty.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/umts_milestone2-keypad-qwerty.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwertz.kl:system/usr/keylayout/umts_milestone2-keypad-qwertz.kl
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qwerty.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/sholes-keypad.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/umts_milestone2-keypad.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/qwerty.kcm \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/sholes-keypad.kcm \
+	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/umts_milestone2-keypad.kcm \
+	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl
 
+PRODUCT_COPY_FILES += \
+	device/motorola/milestone2/prebuilt/bootanimation.zip:system/media/bootanimation.zip \
+	device/motorola/milestone2/prebuilt/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
+	device/motorola/milestone2/prebuilt/etc/terminfo/x/xterm:system/etc/terminfo/x/xterm \
+	device/motorola/milestone2/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc
+
+
+#temp disabled
+	#device/motorola/milestone2/prebuilt/etc/init.d/02qwerty:system/etc/init.d/02qwerty \
+	#device/motorola/milestone2/prebuilt/etc/init.d/04mmcfix:system/etc/init.d/04mmcfix \
+
+	
 #etc
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	device/motorola/milestone2/prebuilt/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-	device/motorola/milestone2/prebuilt/etc/init.d/02qwerty:system/etc/init.d/02qwerty \
+	device/motorola/milestone2/prebuilt/etc/init.d/02ipv6:system/etc/init.d/02ipv6 \
+	device/motorola/milestone2/prebuilt/etc/init.d/03adbd:system/etc/init.d/03adbd \
 	device/motorola/milestone2/prebuilt/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
-	device/motorola/milestone2/prebuilt/etc/init.d/04mmcfix:system/etc/init.d/04mmcfix \
+	device/motorola/milestone2/prebuilt/etc/init.d/07camera:system/etc/init.d/07camera \
 	device/motorola/milestone2/prebuilt/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
 	device/motorola/milestone2/prebuilt/etc/profile:system/etc/profile \
 	device/motorola/milestone2/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf \
@@ -49,7 +65,6 @@ else
 	PRODUCT_COPY_FILES += device/motorola/milestone2/custom_backup_list.txt:system/etc/custom_backup_list.txt
 endif
 
-
 #Bootmenu
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/profiles/standard/init.mapphone_umts.rc:system/bootmenu/2nd-init/init.mapphone_umts.rc \
@@ -65,6 +80,7 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/binary/logwrapper.bin:system/bootmenu/binary/logwrapper.bin \
 	device/motorola/milestone2/bootmenu/binary/logwrapper.bin:system/bin/logwrapper.bin \
 	device/motorola/milestone2/bootmenu/binary/lsof.static:system/bootmenu/binary/lsof \
+	device/motorola/milestone2/bootmenu/binary/2nd-init:system/bootmenu/binary/2nd-init \
 	device/motorola/milestone2/bootmenu/binary/2nd-boot:system/bootmenu/binary/2nd-boot \
 	device/motorola/milestone2/bootmenu/binary/su:system/bootmenu/ext/su \
 	device/motorola/milestone2/bootmenu/config/bootmenu_bypass:system/bootmenu/config/bootmenu_bypass \
@@ -113,6 +129,7 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/recovery/recovery.fstab:system/bootmenu/recovery/recovery.fstab \
 	device/motorola/milestone2/bootmenu/script/2nd-init.sh:system/bootmenu/script/2nd-init.sh \
 	device/motorola/milestone2/bootmenu/script/2nd-boot.sh:system/bootmenu/script/2nd-boot.sh \
+	device/motorola/milestone2/bootmenu/script/stock.sh:system/bootmenu/script/stock.sh \
 	device/motorola/milestone2/bootmenu/script/adbd.sh:system/bootmenu/script/adbd.sh \
 	device/motorola/milestone2/bootmenu/script/bootmode_clean.sh:system/bootmenu/script/bootmode_clean.sh \
 	device/motorola/milestone2/bootmenu/script/cdrom.sh:system/bootmenu/script/cdrom.sh \
@@ -120,18 +137,11 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/script/overclock.sh:system/bootmenu/script/overclock.sh \
 	device/motorola/milestone2/bootmenu/script/post_bootmenu.sh:system/bootmenu/script/post_bootmenu.sh \
 	device/motorola/milestone2/bootmenu/script/pre_bootmenu.sh:system/bootmenu/script/pre_bootmenu.sh \
+	device/motorola/milestone2/bootmenu/script/reboot_command.sh:system/bootmenu/script/reboot_command.sh \
 	device/motorola/milestone2/bootmenu/script/recovery.sh:system/bootmenu/script/recovery.sh \
 	device/motorola/milestone2/bootmenu/script/recovery_stable.sh:system/bootmenu/script/recovery_stable.sh \
 	device/motorola/milestone2/bootmenu/script/recoveryexit.sh:system/bootmenu/script/recoveryexit.sh \
 	device/motorola/milestone2/bootmenu/script/sdcard.sh:system/bootmenu/script/sdcard.sh \
 	device/motorola/milestone2/bootmenu/script/system.sh:system/bootmenu/script/system.sh \
-	device/motorola/milestone2/bootmenu/modules/cpufreq_ondemand.ko:system/bootmenu/ext/modules/cpufreq_ondemand.ko \
-	device/motorola/milestone2/bootmenu/modules/cpufreq_performance.ko:system/bootmenu/ext/modules/cpufreq_performance.ko \
-	device/motorola/milestone2/bootmenu/modules/cpufreq_userspace.ko:system/bootmenu/ext/modules/cpufreq_userspace.ko \
-	device/motorola/milestone2/bootmenu/modules/overclock_milestone2.ko:system/bootmenu/ext/modules/overclock_milestone2.ko \
-	device/motorola/milestone2/modules/cpufreq_conservative.ko:system/bootmenu/ext/modules/cpufreq_conservative.ko \
-	device/motorola/milestone2/modules/cpufreq_interactive.ko:system/bootmenu/ext/modules/cpufreq_interactive.ko \
-	device/motorola/milestone2/modules/cpufreq_powersave.ko:system/bootmenu/ext/modules/cpufreq_powersave.ko \
-	device/motorola/milestone2/modules/cpufreq_smartass.ko:system/bootmenu/ext/modules/cpufreq_smartass.ko \
-	device/motorola/milestone2/modules/cpufreq_stats.ko:system/bootmenu/ext/modules/cpufreq_stats.ko \
-	device/motorola/milestone2/modules/symsearch.ko:system/bootmenu/ext/modules/symsearch.ko
+	device/motorola/milestone2/bootmenu/script/media_fixup.sh:system/bootmenu/script/media_fixup.sh
+

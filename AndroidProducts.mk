@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/milestone2.mk
+    $(LOCAL_DIR)/full_milestone2.mk

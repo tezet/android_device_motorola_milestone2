@@ -27,16 +27,18 @@ if [ -z "$OUT" -o ! -d "$OUT" ]; then
 fi
 
 if [ "$TARGET_BUILD_TYPE" = "debug" ]; then
-    OTAPACKAGE=$OUT/${TARGET_PRODUCT}_debug-ota-$TARGET_BUILD_VARIANT.$LOGNAME.zip
+    OTAPACKAGE=$OUT/${TARGET_PRODUCT}_debug-ota-$TARGET_BUILD_VARIANT.$USER.zip
+elif [ "$TARGET_BUILD_VARIANT" = "userdebug" ]; then
+    OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-eng.$USER.zip
 else
-    OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-$TARGET_BUILD_VARIANT.$LOGNAME.zip
+    OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-$TARGET_BUILD_VARIANT.$USER.zip
 fi
 if [ ! -f "$OTAPACKAGE" ]; then
-	echo "$OTAPACKAGE doesn't exist!";
+	echo "$OTAPACKAGE doesn't exist!"
 	exit 1
 fi
 
-OPTICHARGER=$ANDROID_BUILD_TOP/vendor/cyanogen/tools/opticharger
+OPTICHARGER=$ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/opticharger
 QUIET=-q
 DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
 
@@ -76,19 +78,29 @@ rm -rf $REPACK
 mkdir -p $REPACK
 echo
 
-
 # Unpack the otapackage and opticharge all apks
 mkdir $REPACK/ota
 (
 cd $REPACK/ota
-printf "Unpacking $OTAPACKAGE..."
+printf "Unpacking $OTAPACKAGE ..."
 unzip $QUIET $OTAPACKAGE
 echo
 cd $REPACK/ota/system/framework
-$OPTICHARGER framework-res.apk
-cd $REPACK/ota/system/app
-find ./ -name \*.apk | $XARGS $OPTICHARGER
 )
+
+# Include device specific script
+if [ -f $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh ]; then
+        echo "squisher.sh..."
+        . $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh
+fi
+
+if [ "$1" != "fast" ]; then
+	$OPTICHARGER framework-res.apk
+	cd $REPACK/ota/system/app
+	find ./ -name \*.apk | $XARGS $OPTICHARGER
+else
+	echo "skipping apk optimization"
+fi
 
 
 if [ "$WANT_SQUASHFS" -eq 1 ]; then
@@ -127,12 +139,34 @@ $SED -i \
 	$REPACK/ota/system/build.prop
 
 # Include device specific script
-if [ "$TARGET_PRODUCT" = "cyanogen_milestone2" ]; then
-	. $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh
-fi
+#if [ -f $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh ]; then
+#	echo "squisher.sh..."
+#	. $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh
+#fi
 
 # Delete unnecessary binaries
-( cd $REPACK/ota/system/bin; echo $DELETE_BINS | xargs rm -f; )
+if [ -n "$DELETE_BINS" ]; then
+
+	echo "Remove unwanted binaries"
+	cd $REPACK/ota/system/bin && echo $DELETE_BINS | xargs /bin/rm -f
+fi
+
+cd $REPACK/ota/system/bin && find -name "*_test" -exec /bin/rm -f {} \;
+cd $REPACK/ota/system/bin && find -name "*_Test" -exec /bin/rm -f {} \;
+cd $REPACK/ota/system/bin && find -name "test_*" -exec /bin/rm -f {} \;
+cd $REPACK/ota/system/bin && find -name "*Test*" -exec /bin/rm -f {} \;
+cd $REPACK
+
+# Move vendor bin/lib
+if [ -d $REPACK/ota/system/vendor ]; then
+
+	echo "Move vendor subfolder"
+	cp -R $REPACK/ota/system/vendor/lib/* $REPACK/ota/system/lib/
+	rm -r $REPACK/ota/system/vendor/lib
+	cp -R $REPACK/ota/system/vendor/bin/* $REPACK/ota/system/bin/
+	rm -r $REPACK/ota/system/vendor/bin
+	touch $REPACK/ota/system/vendor/empty
+fi
 
 # Delete leftover wireless driver
 # rm -rf $REPACK/ota/system/lib/modules/*/kernel/drivers/net
@@ -142,17 +176,26 @@ rm -rf $REPACK/ota/recovery
 
 # Strip modules
 [ -d $REPACK/ota/system/lib/modules ] && \
-	find $REPACK/ota/system/lib/modules -name "*.ko" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
+	find $REPACK/ota/system/lib/modules -name "*.ko" -not -name "overclock*" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
 
 # Determine what to name the new signed package
 if [ -z "$CYANOGEN_NIGHTLY" ]; then
 	MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
 	: ${MODVERSION:=nightly}
 	OUTFILE=$OUT/update-cm-$MODVERSION-signed.zip
+	REALDATE=`date +%y%m%d`
+	OUTFILE=$OUT/CM9-ICS-MR0-$REALDATE-milestone2.zip
 else
-	OUTFILE=$OUT/update-squished.zip
+	MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
+	: ${MODVERSION:=nightly}
+	OUTFILE=$OUT/update-cm-$MODVERSION-signed.zip
+	REALDATE=`date +%y%m%d`
+	OUTFILE=$OUT/CM9-ICS-MR0-$REALDATE-milestone2.zip
+	
 	if [ "$TARGET_PRODUCT" = "cyanogen_milestone2" ]; then
+		REALDATE=`sed -n -r 's/ro.build.version.incremental=//p' $REPACK/ota/system/build.prop`
 		MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
+		#MODVERSION=`echo $MODVERSION | sed -r 's/[0-9]{8}/'$REALDATE'/'`
 		OUTFILE=$OUT/cm$MODVERSION.zip
 		if [ -n "$CYANOGEN_NIGHTLY_BOOT" ]; then
 			MODVERSION=`echo $MODVERSION | sed -r 's/NIGHTLY/BOOT'$CYANOGEN_NIGHTLY_BOOT'/'`
@@ -167,7 +210,7 @@ printf "Zipping package..."
 echo
 printf "Signing package..."
 SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
-java -Xmx512m \
+java -Xmx768m \
 	-jar $ANDROID_BUILD_TOP/out/host/$OUT_TARGET_HOST/framework/signapk.jar \
 	-w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
 	$REPACK/update.zip $OUTFILE
@@ -184,6 +227,10 @@ $MD5 $img >$img.md5sum
 echo
 echo "Package complete: $OUTFILE"
 cat $img.md5sum
+echo
+# Build date and current time:
+cat $OUT/system/build.prop | grep ro.build.date=
+ls -l $OUTFILE
 echo
 )
 
