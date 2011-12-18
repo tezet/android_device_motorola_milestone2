@@ -24,7 +24,7 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-USE_CAMERA_STUB := false
+USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 
 TARGET_NO_RECOVERY := false
@@ -141,7 +141,4 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USES_GPSSHIM := false
-
-
-#BOARD_CUSTOM_GRAPHICS := ../../../device/motorola/milestone2/graphics.c
 
