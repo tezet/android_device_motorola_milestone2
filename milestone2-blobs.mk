@@ -13,27 +13,23 @@
 # limitations under the License.
 
 PRODUCT_COPY_FILES += \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qwerty.kl \
 	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/sholes-keypad.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/umts_milestone2-keypad.kl \
 	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/qwerty.kcm \
 	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/sholes-keypad.kcm \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/umts_milestone2-keypad.kcm \
-	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl
+	device/motorola/milestone2/prebuilt/usr/idc/sholes-keypad.idc:system/usr/idc/sholes-keypad.idc \
+	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
+	device/motorola/milestone2/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc
 
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/prebuilt/bootanimation.zip:system/media/bootanimation.zip \
 	device/motorola/milestone2/prebuilt/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
 	device/motorola/milestone2/prebuilt/etc/terminfo/x/xterm:system/etc/terminfo/x/xterm \
-	device/motorola/milestone2/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc
-
 
 #temp disabled
 	#device/motorola/milestone2/prebuilt/etc/init.d/02qwerty:system/etc/init.d/02qwerty \
 	#device/motorola/milestone2/prebuilt/etc/init.d/04mmcfix:system/etc/init.d/04mmcfix \
 
-	
+
 #etc
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
