@@ -67,6 +67,7 @@ DEFAULT_FB_NUM := 0
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/milestone2/UsbController.cpp
 BOARD_HAVE_BLUETOOTH := true
 BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
 BOARD_BOOTIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00280000)
 BOARD_RECOVERYIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00500000)
