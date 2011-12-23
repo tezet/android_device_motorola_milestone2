@@ -22,7 +22,7 @@ touch.orientationAware = 1
 keyboard.layout = qtouch-touchscreen
 keyboard.characterMap = qwerty
 keyboard.orientationAware = 1
-keyboard.builtIn = 1
+keyboard.builtIn = 0
 
 cursor.mode = navigation
 cursor.orientationAware = 1

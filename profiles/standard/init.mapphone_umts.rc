@@ -1,4 +1,7 @@
+# import init.mapphone_umts.usb.rc
+
 on fs
+    log "== mapphone: on fs ------------------------"
 
 # Mount mmc partitions
     mkdir /pds 0775 system system
@@ -7,7 +10,9 @@ on fs
     mount ext3 /dev/block/mmcblk1p26 /data nosuid nodev noatime nodiratime barrier=0
     mount ext3 /dev/block/mmcblk1p7 /pds nosuid nodev noatime nodiratime barrier=1
 
+
 on post-fs
+    log "== mapphone: on post-fs -------------------"
 
 # Backward compatibility
     symlink /dev /dev/netmux
@@ -24,7 +29,6 @@ on post-fs
 # Other global env variables
     export DSP_PATH /system/lib/dsp
 
-    
 # Mount tmp, we dont have swap, use ramfs which can grow if required
     mkdir /tmp
     mount ramfs ramfs /tmp size=512k relatime
@@ -37,86 +41,44 @@ on post-fs
     chown root system /mnt/obb
     chmod 0755 /mnt/obb
 
-# Create mountpoints and mount tmpfs
-    mkdir /pds 0775 system system
-    mkdir /tmp 0777 system system
-    mount tmpfs tmpfs /tmp size=2m
-
-
-
 # Configure kernel options
     # Enable automatic power control for EHCI USB IPC
     write /sys/devices/platform/ehci-omap.0/usb1/power/level auto
     write /sys/devices/platform/ehci-omap.0/usb1/power/autosuspend 0
     write /sys/devices/platform/ehci-omap.0/usb1/1-3/power/level auto
     write /sys/devices/platform/ehci-omap.0/usb1/1-3/power/autosuspend 0
-	# Reset system time
-    write /sys/class/rtc/rtc0/unsecured_rtc on
-
     # Disable a system-wide task dump on OOM in default
     write /proc/sys/vm/oom_dump_tasks 0
     write /proc/sys/fs/suid_dumpable 2
-    # Set core pattern
-    write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
-
-    
     # Power Management
-    write /sys/power/sleep_while_idle 1
-    write /sys/power/enable_off_mode 1
-
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold 86
     write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate 46875
     write /sys/power/sr_vdd1_autocomp 1
     write /sys/power/sr_vdd2_autocomp 1
-    write /sys/power/enable_abb_mode 1
-
 # Change ownership for vibrators
-	chown system system /sys/class/timed_output/lvibrator/enable
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/timed_output/vibrator/sweep
-# Change permission of vibrators
-    chmod 0660 /sys/class/timed_output/lvibrator/enable
     chmod 0660 /sys/class/timed_output/vibrator/enable
     chmod 0660 /sys/class/timed_output/vibrator/sweep
-# bluetooth power up/down interface
+# bluetooth power up/down interface (wl127x Bluetooth and hci0)
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
     chmod 0660 /sys/class/rfkill/rfkill1/state
-    
-# Mount mtd partitions
-    # mount /pds as r/w
-    # We chown/chmod /pds again so because mount is run as root + defaults
-    mount yaffs2 mtd@pds /pds nosuid nodev no-checkpoint
-    exec /system/bin/logwrapper /system/bin/mount_ext3.sh pds /pds
-    chown system system /pds
-    chmod 0775 /pds
-    mkdir /pds/comm_drv 0770 radio radio
-    mkdir /pds/public 0775 system shell
-    chmod 0775 /pds/public
-    #change perms for already created /pds/camera directory
-    chown system media /pds/camera
-    chmod 0775 /pds/camera
-# w21122, FID 23103, IKDEFYPGC-338, 2011-06-16
-    mkdir /pds/autoreg
-    #chown system system /pds/autoreg
-    chown radio radio /pds/autoreg
-    chmod 0755 /pds/autoreg
-# setting 0755 permission to scim dir
-    mkdir /pds/scim 0755 root radio
-    chown root radio /pds/scim
-    chmod 0755 /pds/scim
-
-    
-    
 # Tweaks
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
-# Dont delete this line, used as event in bootmenu (3 par.)
+    # module made to emulate sammy usb
+    # insmod /system/lib/modules/android_usb.ko
+
+on post-fs-data
+    log "== mapphone: on post-fs-data -------------------"
+   
+# Dont delete this line, used as event in bootmenu (cpu settings & postbootmenu)
     exec /system/bin/logwrapper postbootmenu
 
     # Enable ADB mode (made in init.d)
@@ -126,8 +88,7 @@ on post-fs
 
     mount rootfs rootfs / ro remount
 
-
-# Create basic filesystem structure
+    # Create basic filesystem structure
     # we chown/chmod /pds again so because mount is run as root + defaults
     mkdir /pds/lost+found
     chown system shell /pds/public
@@ -137,100 +98,47 @@ on post-fs
     chown radio radio /pds/bp_nvm
     chmod 0770 /pds/bp_nvm
     # wifi dirs
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    mkdir /data/comm_drv 0770 radio radio
-    mkdir /data/gki 0770 radio radio
-    mkdir /tmp/commdrv 0770 radio radio
     mkdir /data/misc/wifi/hostapd.sockets 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/comm_drv 0770 radio radio
     chown dhcp dhcp /data/misc/dhcp
+
     # following two dirs are for storing BP Flex and PDS files. NVM Daemon is using these folders
     mkdir /data/bp_nvm
+    mkdir /data/gki 0770 radio radio
+    mkdir /tmp/commdrv 0770 radio radio
     chown radio radio /data/bp_nvm
     chmod 0770 /data/bp_nvm
-    # create system directory
-    mkdir /data/system 0771 system system
-    
-    mkdir /pds/bp_nvm
-    chown radio radio /pds/bp_nvm
-    chmod 0770 /pds/bp_nvm
-    # create logger folder
-    mkdir /data/logger 0770 radio log
-    chown radio log /data/logger
-    chmod 0770 /data/logger
-    mkdir /data/panicreports
-    chown root radio /data/panicreports
-    chmod 0777 /data/panicreports
-    # create the lost+found directories, so as to enforce our permissions
-    mkdir /pds/lost+found 0770
-    # double check the perms, in case lost+found already exists, and set owner
-    chown root root /pds/lost+found
-    chmod 0770 /pds/lost+found
-    #Create location directory
-    mkdir /data/location 0771 radio radio
-    #Create opprof directory
-    mkdir /data/opprof 0770 radio shell
-    # Create anr directory and change permission to 777 to save trace.txt
-
-    
-    
     # create location directory
     mkdir /data/location 0771 radio radio
     # create opprof directory
     mkdir /data/opprof 0770 radio shell
     # create dropbear directory
     mkdir /data/dropbear 0755 root shell
-    # create anr directory and change permission to 777 to save trace.txt
-    mkdir /data/anr
-    chmod 0777 /data/anr
     # create the necessary dirs for tpapi with proper permission
     mkdir /data/tpapi
     mkdir /data/tpapi/etc
     mkdir /data/tpapi/etc/tpa
     mkdir /data/tpapi/etc/tpa/persistent
-    mkdir /data/local 0771 system shell
-    mkdir /data/local/tmp 0771 system shell
-    mkdir /data/local/12m 0771 system shell
-    mkdir /data/local/12m/batch 0771 system shell
-    chmod 2770 /pds/security
-    chmod 2770 /data/tpapi
-    chmod 2770 /data/tpapi/etc
-    chmod 2770 /data/tpapi/etc/tpa
-    chmod 2770 /data/tpapi/etc/tpa/persistent
+    chmod 0770 /pds/security
+    chmod 0770 /data/tpapi
+    chmod 0770 /data/tpapi/etc
+    chmod 0770 /data/tpapi/etc/tpa
+    chmod 0770 /data/tpapi/etc/tpa/persistent
     chown system system /pds/security
     chown system system /data/tpapi
     chown system system /data/tpapi/etc
     chown system system /data/tpapi/etc/tpa
     chown system system /data/tpapi/etc/tpa/persistent
-    chown system shell /data/local
-    chown system shell /data/local/12m
-    chown system shell /data/local/12m/batch
-    chown system shell /data/local/tmp
 
     # copy hostapd configuration
     copy /system/etc/wifi/softap/hostapd.conf /data/misc/wifi/hostapd.conf
 
-    # Enable ADB mode
-    # write /dev/usb_device_mode msc_adb
-    
-    # Permissions for video
-    chmod 0770 /dev/hp3a-omap
-    chmod 0770 /dev/hplens-omap
-    chmod 0770 /dev/video0
-    chmod 0770 /dev/video1
-    chmod 0770 /dev/video2
-    chown media camera /dev/hp3a-omap
-    chown media camera /dev/hplens-omap
-    chown media camera /dev/video0
-    chown media graphics /dev/video1
-    chown media graphics /dev/video2
-    
-
-    mount rootfs rootfs / ro remount
+    setprop vold.post_fs_data_done 1
 
 on init
+    log "== mapphone: on init ----------------------"
 
     # Temporary fix permissions for gb kernel
     chown root system /dev/cpcap
@@ -257,27 +165,38 @@ on init
     insmod /system/lib/modules/netmux.ko
     insmod /system/lib/modules/netmux_linkdriver.ko
     insmod /system/lib/modules/modem_pm_driver.ko
-    insmod /system/lib/modules/tun.ko
-    insmod /system/lib/modules/nls_utf8.ko
-    insmod /system/lib/modules/slow-work.ko
-    insmod /system/lib/modules/cifs.ko
-    insmod /system/lib/modules/symsearch.ko
-    insmod /system/lib/modules/usbled.ko
+
     insmod /system/lib/modules/xt_multiport.ko
     insmod /system/lib/modules/xt_quota2.ko
     insmod /system/lib/modules/xt_owner2.ko
-    insmod /system/lib/modules/mmcfix.ko
-    insmod /system/lib/modules/gpiofix.ko
-    insmod /system/lib/modules/vpnclient.ko
 
+    insmod /system/lib/modules/tun.ko
+    insmod /system/lib/modules/symsearch.ko
+    insmod /system/lib/modules/mmcfix.ko
+    insmod /system/lib/modules/usbled.ko
+    insmod /system/lib/modules/gpiofix.ko
+
+    # Cifs module is actually not compiled by us
+    insmod /system/lib/modules/nls_utf8.ko
+    insmod /system/lib/modules/slow-work.ko
+    insmod /system/lib/modules/cifs.ko
+
+on charger
+    log "== mapphone: on charger -------------------"
+    start console
+    start battd
+    write /data/simpin lock
+    start charge
+    stop zygote
+
+on early-boot
+    log "== mapphone: on early-boot ----------------"
 
 on boot
+    log "== mapphone: on boot ----------------------"
 
     # Enable panic on softlockup
     write /proc/sys/kernel/softlockup_panic 1
-    
-    setprop ro.build.product milestone2
-    setprop ro.product.device milestone2
 
     # Change the ownership of led files.
     chown system system /sys/class/leds/lcd-backlight/als
@@ -306,146 +225,144 @@ on boot
     chmod 0660 /sys/class/leds/torch-flash/flash_light
     chmod 0666 /sys/class/leds/spotlight/brightness
 
-# Charge only mode services.
+    # Charge only mode services.
     exec /system/bin/mot_boot_mode
+
 on property:sys.chargeonly.mode=1
-    start battd
-    start console
-    write /data/simpin lock
-    exec /system/bin/charge_only_mode
-    exec /system/bin/stop zygote
+    log "on property sys.chargeonly.mode=1 starting charger"
+    class_reset main
+    class_reset late_start
+    class_start charger
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
 # Adb over Network
 on property:service.adb.tcp.port=5555
-    stop adbd
-    start adbd
-on property:service.adb.tcp.port=-1
-    stop adbd
-    start adbd
-# Adb ICS
-on property:persist.sys.usb.config=*
-    setprop sys.usb.config $persist.sys.usb.config
-
-on property:sys.usb.config=mass_storage,adb
-    # Made by usbd, but could be usefull later..
-    # write /sys/devices/virtual/usb_composite/adb/enable 0
-    # write /dev/usb_device_mode msc_adb
-    # write /tmp/usbd_current_state usb_mode_msc_adb
-    # write /sys/devices/virtual/usb_composite/adb/enable 1
-    start adbd
-on property:sys.usb.config=mtp,adb
-    start adbd
-on property:sys.usb.config=ptp,adb
-    start adbd
-on property:service.adb.root=1
-    write /sys/devices/virtual/usb_composite/adb/enable 0
     restart adbd
-    write /sys/devices/virtual/usb_composite/adb/enable 1
+on property:service.adb.tcp.port=-1
+    restart adbd
+
+on property:persist.sys.usb.config=adb
+    start adbd
+    setprop sys.usb.state $persist.sys.usb.config
+    log "on property persist.sys.usb.config=" $persist.sys.usb.config
+
+on property:persist.sys.usb.config=none
+    stop adbd
+    setprop sys.usb.state $persist.sys.usb.config
+    log "on property persist.sys.usb.config=" $persist.sys.usb.config
+
+on property:service.adb.root=1
+    log "on property service.adb.root=" $service.adb.root
+    restart adbd
+
+service reboot_key /system/bin/reboot
+    user system
+    group root
+    oneshot
+    keycodes 114 115 107
+    disabled
+
 service usbd /system/bin/usbd
-	class main
+    class main
     user root
+service charge /system/bin/charge_only_mode
+    group root
+    oneshot
+    disabled
 service nvm-daemon /system/bin/nvm_daemon
-	class main
+    class main
     user root
     group radio
-# start start_modem.sh to for development purpose
-#service start_modem /system/bin/sh /system/usr/bin/start_modem.sh
-#    class pre-zygote_services
-#    oneshot
-# start commdrv pds script
 service start_commdrv /system/bin/sh /system/etc/motorola/comm_drv/commdrv_fs.sh
-	class main
+    class main
     oneshot
     user radio
     group radio system cache
 service gkisystem /system/bin/gkisystem
-	class main
+    class late_start
     socket location_shim stream 660 radio system
     socket gpshal_socket stream 660 radio system
     socket opprofdaemon stream 660 radio system
-    socket gkilog_sock stream 660 radio system
     group radio system
-    onrestart exec /system/bin/gki_pd_notifier
-service rild_tcmd /system/bin/rild_tcmd
-#    class pre-zygote_services
-    class main
-    socket rild_tcmd stream 0660 radio system
-    user radio
-    group radio
+    oneshot
 service battd /system/bin/battd
-	class main
+    class main
     socket battdsock stream 660 root system
     user root
-    group system
-    oneshot
-service bplogd_daemon /system/bin/bplogd_daemon
-#    class pre-zygote_services
-    class main
-    socket dlog_cmds stream 660 radio log
-    socket bp_pd_status stream 660 radio log
-    socket bp_aol_cmd stream 666 radio log
-    user radio
-    group radio inet log sdcard_rw mount
+    group system 9001
     oneshot
 service ssmgrd /system/bin/ssmgrd
-	class main
+    class main
     group radio input system
     oneshot
 
 # Bluetooth services.
 service hciattach /system/bin/hciattach -n -t 10 /dev/ttyS1 texasalt 3000000 flow
-	class main
+    class main
     user bluetooth
     group bluetooth net_bt_admin
     disabled
 
 # Ecompass daemon
 service akmd2 /system/bin/akmd2
-	class main
+    class late_start
     user compass
     group compass misc input
 
 # Wifi services
 service wlan_loader /system/bin/wlan_loader -f /system/etc/wifi/fw_wlan1271.bin -i /system/etc/wifi/tiwlan.ini -e /pds/wifi/nvs_map.bin
-	class main
+    class main
     disabled
     oneshot
 service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
-	class main
+    class main
     socket wpa_tiwlan0 dgram 660 wifi wifi
     disabled
     oneshot
 service wlan_ap_loader /system/bin/logwrapper /system/bin/tiap_loader -f /system/etc/wifi/fw_tiwlan_ap.bin -i /system/etc/wifi/tiwlan_ap.ini -e /pds/wifi/nvs_map.bin
-	class main
     disabled
     oneshot
 service hostapd /system/bin/logwrapper /system/bin/hostap -d /data/misc/wifi/hostapd.conf
-	class main    
+    class main
     disabled
     oneshot
-service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL tiwlan0
-	class main
+service dhcpcd_tiwlan0 /system/bin/dhcpcd -ABKL
+    class main
     disabled
     oneshot
 service iprenew_tiwlan0 /system/bin/dhcpcd -n
-	class main
+    class main
     disabled
     oneshot
-service baseimage /system/bin/dspexec -v -T /system/lib/dsp/baseimage.dof
-	class main
-    user media
-    group media graphics
-    oneshot
-service locDrv /system/bin/brcm_guci_drv -config /system/etc/gpsconfig.xml
-	class main
-    user radio
-    group radio inet sdcard_rw
+
 # 3D init
 service pvrsrvinit /system/bin/pvrsrvinit
     class core
     user root
     group root
     oneshot
+
+service baseimage /system/bin/dspexec -v -T /system/lib/dsp/baseimage.dof
+    class main
+    user media
+    group media graphics
+    oneshot
+
+service locDrv /system/bin/brcm_guci_drv -config /system/etc/gpsconfig.xml
+    class late_start
+    user radio
+    group radio inet sdcard_rw
+
+service motolocation /system/bin/sh /system/bin/am startservice -n com.motorola.android.location/com.motorola.android.locationproxy.LocationProxyService
+    class late_start
+    disabled
+    oneshot
+
+service fmradio /system/bin/fmradioserver
+    class late_start
+    disabled
+    user system
+    group bluetooth net_bt_admin net_raw net_admin misc
+

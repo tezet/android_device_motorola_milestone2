@@ -71,6 +71,8 @@ endif
 #Bootmenu
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/profiles/standard/init.mapphone_umts.rc:system/bootmenu/2nd-init/init.mapphone_umts.rc \
+	device/motorola/milestone2/profiles/standard/init.mapphone_umts.usb.rc:system/bootmenu/2nd-init/init.mapphone_umts.usb.rc \
+	device/motorola/milestone2/profiles/standard/init.rc:system/bootmenu/2nd-init/init.rc \
 	device/motorola/milestone2/profiles/standard/ueventd.rc:system/bootmenu/2nd-init/ueventd.rc \
 	device/motorola/milestone2/profiles/backup/init.rc:system/bootmenu/2nd-boot/init.rc \
 	device/motorola/milestone2/profiles/backup/init.mapphone_umts.rc:system/bootmenu/2nd-boot/init.mapphone_umts.rc \
@@ -82,7 +84,6 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/binary/adbd:system/bootmenu/binary/adbd \
 	device/motorola/milestone2/bootmenu/binary/logwrapper.bin:system/bootmenu/binary/logwrapper.bin \
 	device/motorola/milestone2/bootmenu/binary/logwrapper.bin:system/bin/logwrapper.bin \
-	device/motorola/milestone2/bootmenu/binary/lsof.static:system/bootmenu/binary/lsof \
 	device/motorola/milestone2/bootmenu/binary/2nd-init:system/bootmenu/binary/2nd-init \
 	device/motorola/milestone2/bootmenu/binary/2nd-boot:system/bootmenu/binary/2nd-boot \
 	device/motorola/milestone2/bootmenu/binary/su:system/bootmenu/ext/su \
@@ -130,6 +131,7 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/recovery/sbin/mke2fs.bin:system/bootmenu/recovery/sbin/mke2fs.bin \
 	device/motorola/milestone2/bootmenu/recovery/sbin/tune2fs.bin:system/bootmenu/recovery/sbin/tune2fs \
 	device/motorola/milestone2/bootmenu/recovery/recovery.fstab:system/bootmenu/recovery/recovery.fstab \
+	device/motorola/milestone2/bootmenu/script/_config.sh:system/bootmenu/script/_config.sh \
 	device/motorola/milestone2/bootmenu/script/2nd-init.sh:system/bootmenu/script/2nd-init.sh \
 	device/motorola/milestone2/bootmenu/script/2nd-boot.sh:system/bootmenu/script/2nd-boot.sh \
 	device/motorola/milestone2/bootmenu/script/stock.sh:system/bootmenu/script/stock.sh \
@@ -146,5 +148,4 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/bootmenu/script/recoveryexit.sh:system/bootmenu/script/recoveryexit.sh \
 	device/motorola/milestone2/bootmenu/script/sdcard.sh:system/bootmenu/script/sdcard.sh \
 	device/motorola/milestone2/bootmenu/script/system.sh:system/bootmenu/script/system.sh \
-	device/motorola/milestone2/bootmenu/script/media_fixup.sh:system/bootmenu/script/media_fixup.sh
-
+	device/motorola/milestone2/bootmenu/script/media_fixup.sh:system/bootmenu/script/media_fixup.sh \
