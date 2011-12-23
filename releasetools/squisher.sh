@@ -8,10 +8,18 @@ VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/milestone2
 
 # Delete unwanted apps
 rm -f $REPACK/ota/system/app/RomManager.apk
+#rm -f $REPACK/ota/system/app/MusicFX.apk
+#rm -f $REPACK/ota/system/app/DSPManager.apk
+#rm -f $REPACK/ota/system/app/VideoEditor.apk
+rm -f $REPACK/ota/system/app/Term.apk
 
-# rm -f $REPACK/ota/system/xbin/irssi
+# Apk required, (forbidden in product copy files in ics)
+#cp $DEVICE_TOP/prebuilt/app/basebandswitcherV4.0.apk $REPACK/ota/system/app/BasebandSwitcher.apk
+#cp $DEVICE_TOP/prebuilt/app/Superuser.apk $REPACK/ota/system/app/Superuser.apk
+cp -f $VENDOR_TOP/app/* $REPACK/ota/system/app/
 
-# these scripts are not required
+# these scripts are not required or bad
+rm -f $REPACK/ota/system/bin/sysinit
 rm -f $REPACK/ota/system/etc/init.d/03firstboot
 rm -f $REPACK/ota/system/etc/init.d/04modules
 
@@ -24,24 +32,27 @@ cp $REPACK/ota/system/etc/terminfo/l/linux $REPACK/ota/system/etc/terminfo/x/xte
 
 # prebuilt boot, devtree, logo & updater-script
 rm -f $REPACK/ota/boot.img
-cp -f $ANDROID_BUILD_TOP/device/motorola/milestone2/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
-if [ -n "$CYANOGEN_RELEASE" ]; then
-  cat $ANDROID_BUILD_TOP/device/motorola/milestone2/updater-script-rel >> $REPACK/ota/META-INF/com/google/android/updater-script
-  cp -f $ANDROID_BUILD_TOP/vendor/motorola/milestone2/boot.smg $REPACK/ota/boot.img
-  cp -f $ANDROID_BUILD_TOP/vendor/motorola/milestone2/devtree.smg $REPACK/ota/devtree.img
-  cp -f $ANDROID_BUILD_TOP/vendor/motorola/milestone2/logo-moto.raw $REPACK/ota/logo.img
+cp -f $DEVICE_TOP/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
+if [ -n "$CM_RELEASE" ]; then
+  cat $DEVICE_TOP/updater-script-rel >> $REPACK/ota/META-INF/com/google/android/updater-script
+  cp -f $VENDOR_TOP/boot.smg $REPACK/ota/boot.img
+  cp -f $VENDOR_TOP/devtree.smg $REPACK/ota/devtree.img
+  cp -f $VENDOR_TOP/logo-moto.raw $REPACK/ota/logo.img
 fi
-cp -f $ANDROID_BUILD_TOP/out/target/product/milestone2/root/init $REPACK/ota/system/bootmenu/2nd-init/init
-cp -f $REPACK/ota/system/bootmenu/binary/2nd-init $REPACK/ota/system/bootmenu/binary/2nd-init
-cp -f $ANDROID_BUILD_TOP/out/target/product/milestone2/root/init.rc $REPACK/ota/system/bootmenu/2nd-init/init.rc
-cp -f $ANDROID_BUILD_TOP/out/target/product/milestone2/root/sbin/adbd $REPACK/ota/system/bin/adbd
 
-# use the static busybox as bootmenu shell
-cp -f $ANDROID_BUILD_TOP/out/target/product/milestone2/utilities/busybox $REPACK/ota/system/bootmenu/binary/busybox
+# Opensource init binary
+cp -f $DEVICE_OUT/root/init $REPACK/ota/system/bootmenu/2nd-init/init
+
+# Use a prebuilt adbd configured for root access instead of normal one, for dev purpose
+cp -f $REPACK/ota/system/bootmenu/binary/adbd $REPACK/ota/system/bin/adbd
+#cp -f $DEVICE_OUT/root/sbin/adbd $REPACK/ota/system/bin/adbd
+
+cp -f $DEVICE_TOP/bootmenu/binary/2nd-init $REPACK/ota/system/bootmenu/binary/2nd-init
+
+# use the static busybox as bootmenu shell, and some static utilities
+cp -f $DEVICE_OUT/utilities/busybox $REPACK/ota/system/bootmenu/binary/busybox
+cp -f $DEVICE_OUT/utilities/lsof $REPACK/ota/system/bootmenu/binary/lsof
 
 # ril fix
 cp -f $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/liba2dp.so
-
-# temporary tool to fix orientation
-cp -f $ANDROID_BUILD_TOP/device/motorola/milestone2/prebuilt/app/Orientator.apk $REPACK/ota/system/app/
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Squish a CM otapackage for distribution
-# cyanogen
+# cyanogen / CyanogenDefy
 #
 
 echo "MILESTONE2 SQUISHER:"
@@ -138,12 +138,6 @@ $SED -i \
 	-e '/ro\.build\.type/s/eng/user/' \
 	$REPACK/ota/system/build.prop
 
-# Include device specific script
-#if [ -f $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh ]; then
-#	echo "squisher.sh..."
-#	. $ANDROID_BUILD_TOP/device/motorola/milestone2/releasetools/squisher.sh
-#fi
-
 # Delete unnecessary binaries
 if [ -n "$DELETE_BINS" ]; then
 
@@ -158,7 +152,7 @@ cd $REPACK/ota/system/bin && find -name "*Test*" -exec /bin/rm -f {} \;
 cd $REPACK
 
 # Move vendor bin/lib
-if [ -d $REPACK/ota/system/vendor ]; then
+if [ -d $REPACK/ota/system/vendor/lib ]; then
 
 	echo "Move vendor subfolder"
 	cp -R $REPACK/ota/system/vendor/lib/* $REPACK/ota/system/lib/
@@ -179,27 +173,22 @@ rm -rf $REPACK/ota/recovery
 	find $REPACK/ota/system/lib/modules -name "*.ko" -not -name "overclock*" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
 
 # Determine what to name the new signed package
-if [ -z "$CYANOGEN_NIGHTLY" ]; then
+if [ -z "$CM_NIGHTLY" ]; then
 	MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
 	: ${MODVERSION:=nightly}
 	OUTFILE=$OUT/update-cm-$MODVERSION-signed.zip
 	REALDATE=`date +%y%m%d`
-	OUTFILE=$OUT/CM9-ICS-MR0-$REALDATE-milestone2.zip
+	OUTFILE=$OUT/CM9-ICS-MR1-$REALDATE-milestone2.zip
 else
-	MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
-	: ${MODVERSION:=nightly}
-	OUTFILE=$OUT/update-cm-$MODVERSION-signed.zip
-	REALDATE=`date +%y%m%d`
-	OUTFILE=$OUT/CM9-ICS-MR0-$REALDATE-milestone2.zip
-	
-	if [ "$TARGET_PRODUCT" = "cyanogen_milestone2" ]; then
+	OUTFILE=$OUT/update-squished.zip
+	if [ "$TARGET_PRODUCT" = "cm_milestone2" ]; then
 		REALDATE=`sed -n -r 's/ro.build.version.incremental=//p' $REPACK/ota/system/build.prop`
 		MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
-		#MODVERSION=`echo $MODVERSION | sed -r 's/[0-9]{8}/'$REALDATE'/'`
-		OUTFILE=$OUT/cm$MODVERSION.zip
-		if [ -n "$CYANOGEN_NIGHTLY_BOOT" ]; then
-			MODVERSION=`echo $MODVERSION | sed -r 's/NIGHTLY/BOOT'$CYANOGEN_NIGHTLY_BOOT'/'`
-			OUTFILE=$OUT/cm$MODVERSION.zip
+		MODVERSION=`echo $MODVERSION | sed -r 's/[0-9]{8}/'$REALDATE'/'`
+		OUTFILE=$OUT/CM$MODVERSION.zip
+		if [ -n "$CM_NIGHTLY_BOOT" ]; then
+			MODVERSION=`echo $MODVERSION | sed -r 's/NIGHTLY/BOOT'$CM_NIGHTLY_BOOT'/'`
+			OUTFILE=$OUT/CM$MODVERSION.zip
 		fi
 	fi
 fi
