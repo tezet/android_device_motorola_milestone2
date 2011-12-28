@@ -1,4 +1,19 @@
+# Copyright (C) 2010 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 key 2     1
+key 3     2
 key 4     3
 key 5     4
 key 6     5
@@ -56,11 +71,11 @@ key 61    CALL
 key 62    ENDCALL           WAKE_DROPPED
 key 100   ALT_RIGHT
 key 102   HOME
-key 103   DPAD_UP
-key 105   DPAD_LEFT
-key 106   DPAD_RIGHT
-key 107   POWER           WAKE_DROPPED
-key 108   DPAD_DOWN
+key 106   DPAD_UP
+key 103   DPAD_LEFT
+key 108   DPAD_RIGHT
+key 107   POWER	          WAKE_DROPPED
+key 105   DPAD_DOWN
 key 114   VOLUME_DOWN
 key 115   VOLUME_UP
 key 116   POWER             WAKE

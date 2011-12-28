@@ -293,7 +293,9 @@ on property:vold.decrypt=trigger_reset_main
     class_reset main
 
 on property:vold.decrypt=trigger_load_persist_props
+    log "== trigger_load_persist_props --------------------"
     load_persist_props
+    start initd_scripts
 
 on property:vold.decrypt=trigger_post_fs_data
     trigger post-fs-data
@@ -376,7 +378,14 @@ service adbd /sbin/adbd
     class main
     group shell
     user root
-
+    
+service initd_scripts /system/xbin/run-parts /system/etc/init.d/
+    log "== init.rc: running /etc/init.d scripts --------------------"
+    class main
+    group shell
+    user root
+    oneshot
+    
 #service adbd.root /sbin/adbd.root
 #    class core
 #    disabled

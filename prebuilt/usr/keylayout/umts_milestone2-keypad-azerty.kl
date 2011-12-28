@@ -71,11 +71,11 @@ key 61    CALL
 key 62    ENDCALL           WAKE_DROPPED
 key 100   ALT_RIGHT
 key 102   HOME
-key 103   DPAD_UP
-key 105   DPAD_LEFT
-key 106   DPAD_RIGHT
+key 106   DPAD_UP
+key 103   DPAD_LEFT
+key 108   DPAD_RIGHT
 key 107   POWER	          WAKE_DROPPED
-key 108   DPAD_DOWN
+key 105   DPAD_DOWN
 key 114   VOLUME_DOWN
 key 115   VOLUME_UP
 key 116   POWER             WAKE

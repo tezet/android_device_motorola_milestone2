@@ -26,9 +26,6 @@ if [ -d /system/bootmenu/init.d ]; then
     run-parts /system/bootmenu/init.d/
 fi
 
-chmod 755 /system/etc/init.d/*
-run-parts /system/etc/init.d/
-
 # Clean market cache
 rm -f /data/data/com.android.providers.downloads/cache/*
 
@@ -60,6 +57,6 @@ mount -o remount,ro rootfs /
 mount -o remount,ro $PART_SYSTEM /system
 ##################################################
 
-#/system/bootmenu/script/media_fixup.sh &
+chmod 755 /system/etc/init.d/*
 
 exit 0
