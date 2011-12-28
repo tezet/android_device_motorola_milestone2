@@ -1,4 +1,4 @@
-package com.cyanogenmod.m2parts;
+package com.cyanogenmod.settings.device;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
+public class DeviceSettings extends PreferenceActivity implements OnPreferenceChangeListener {
     private static final String TAG = "M2Parts";
 
     private ListPreference keypadTypePref;

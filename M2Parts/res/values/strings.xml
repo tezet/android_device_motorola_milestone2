@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_shortname" translatable="false">M2Parts</string>
-    <string name="app_name">Milestone2 Settings</string>
+	<string name="app_shortname" translatable="false">Milestone 2 Settings</string>
+    <string name="app_name">Milestone 2 Settings</string>
 
     <string name="general_settings_title">General Settings</string>
 

@@ -12,19 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 PRODUCT_COPY_FILES += \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/sholes-keypad.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/sholes-keypad.kcm \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/umts_milestone2-keypad-qwerty.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/umts_milestone2-keypad-qwerty.kcm \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwertz.kl:system/usr/keylayout/umts_milestone2-keypad-qwertz.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwertz.kcm:system/usr/keychars/umts_milestone2-keypad-qwertz.kcm \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-azerty.kl:system/usr/keylayout/umts_milestone2-keypad-azerty.kl \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-azerty.kcm:system/usr/keychars/umts_milestone2-keypad-azerty.kcm \
-	device/motorola/milestone2/prebuilt/usr/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
-	device/motorola/milestone2/prebuilt/usr/idc/sholes-keypad.idc:system/usr/idc/sholes-keypad.idc \
-	device/motorola/milestone2/prebuilt/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
-	device/motorola/milestone2/prebuilt/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc
+	device/motorola/milestone2/prebuilt/usr/keylayout/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
+	device/motorola/milestone2/prebuilt/usr/keylayout/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/sholes-keypad.kl \
+	device/motorola/milestone2/prebuilt/usr/keychars/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/sholes-keypad.kcm
+		
+# copy all idc files
+PRODUCT_COPY_FILES += $(shell test -d device/motorola/milestone2/prebuilt/usr/idc/ &&  \
+	find device/motorola/milestone2/prebuilt/usr/idc/ -name '*.idc' \
+	-printf '%p:system/usr/idc/%f ')
+	
+# copy all keylayout files
+PRODUCT_COPY_FILES += $(shell test -d device/motorola/milestone2/prebuilt/usr/keylayout/ &&  \
+	find device/motorola/milestone2/prebuilt/usr/keylayout/ -name '*.kl' \
+	-printf '%p:system/usr/keylayout/%f ')
+	
+# copy all keychars files
+PRODUCT_COPY_FILES += $(shell test -d device/motorola/milestone2/prebuilt/usr/keychars/ &&  \
+	find device/motorola/milestone2/prebuilt/usr/keychars/ -name '*.kcm' \
+	-printf '%p:system/usr/keychars/%f ')
 
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/prebuilt/bootanimation.zip:system/media/bootanimation.zip \

@@ -125,7 +125,8 @@ PRODUCT_PACKAGES += \
 	ssh \
 	Superuser \
 	su \
-	M2Parts
+	M2Parts \
+	CMSettings
 
 PRODUCT_PACKAGES += \
 	qwerty.kcm
