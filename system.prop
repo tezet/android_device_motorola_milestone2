@@ -2,9 +2,12 @@
 # system.prop for jordan
 #
 
-rild.libpath=/system/lib/librilswitch.so
-rilswitch.vendorlibpath=/system/lib/libril-moto-umts-1.so
-rilswitch.ganlibpath=/system/lib/libganril.so
+#rild.libpath=/system/lib/librilswitch.so
+#rilswitch.vendorlibpath=/system/lib/libril-moto-umts-1.so
+#rilswitch.ganlibpath=/system/lib/libganril.so
+
+rild.libpath=/system/lib/libril-moto-umts-1.so
+
 rild.libargs=-d /dev/ttyS0
 
 ro.sf.lcd_density=240
@@ -45,7 +48,7 @@ ro.cwm.forbid_format=/misc,/devtree,/config,/boot,/recovery,/pds,/system
 # off = keep LED off during charging
 # white = white LED for 'charging', green LED for 'charged'
 # rgb = mixed yellowish LED for 'charging', green LED for 'charged'
-persist.sys.charge_led=white
+persist.sys.charge_led=off
 
 # Brightness scaling of the button backlight
 persist.sys.button_brightness=100
@@ -79,4 +82,8 @@ ro.telephony.ril.v3=skipbrokendatacall,signalstrength
 
 # all/choice
 hwui.print_config=choice
+
+# This defines the min duration between two pointer event in ms
+ro.min_pointer_dur=10
+
 

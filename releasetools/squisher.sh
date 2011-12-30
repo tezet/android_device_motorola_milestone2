@@ -8,9 +8,9 @@ VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/milestone2
 
 # Delete unwanted apps
 rm -f $REPACK/ota/system/app/RomManager.apk
-#rm -f $REPACK/ota/system/app/MusicFX.apk
-#rm -f $REPACK/ota/system/app/DSPManager.apk
-#rm -f $REPACK/ota/system/app/VideoEditor.apk
+rm -f $REPACK/ota/system/app/MusicFX.apk
+rm -f $REPACK/ota/system/app/DSPManager.apk
+rm -f $REPACK/ota/system/app/VideoEditor.apk
 rm -f $REPACK/ota/system/app/Term.apk
 
 # Apk required, (forbidden in product copy files in ics)
@@ -35,8 +35,8 @@ rm -f $REPACK/ota/boot.img
 cp -f $DEVICE_TOP/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
 if [ -n "$CM_RELEASE" ]; then
   cat $DEVICE_TOP/updater-script-rel >> $REPACK/ota/META-INF/com/google/android/updater-script
-  cp -f $VENDOR_TOP/boot.smg $REPACK/ota/boot.img
-  cp -f $VENDOR_TOP/devtree.smg $REPACK/ota/devtree.img
+  cp -f $VENDOR_TOP/boot-$CM_VARIANT.smg $REPACK/ota/boot.img 
+  cp -f $VENDOR_TOP/devtree-$CM_VARIANT.smg $REPACK/ota/devtree.img
   cp -f $VENDOR_TOP/logo-moto.raw $REPACK/ota/logo.img
 fi
 

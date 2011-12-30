@@ -115,7 +115,7 @@ BOARD_NEVER_UMOUNT_SYSTEM := true
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 
 # Override cyanogen squisher to customize our update zip package
-TARGET_CUSTOM_RELEASETOOL := ./device/motorola/milestone2/releasetools/squisher
+TARGET_CUSTOM_RELEASETOOL := ./device/motorola/milestone2/releasetools/pre_squisher
 
 # Milestone2 need 2nd-init binary from motorola common
 TARGET_NEEDS_MOTOROLA_HIJACK := true
