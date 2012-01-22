@@ -8,8 +8,8 @@ VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/milestone2
 
 # Delete unwanted apps
 rm -f $REPACK/ota/system/app/RomManager.apk
-rm -f $REPACK/ota/system/app/MusicFX.apk
-rm -f $REPACK/ota/system/app/DSPManager.apk
+#rm -f $REPACK/ota/system/app/MusicFX.apk
+#rm -f $REPACK/ota/system/app/DSPManager.apk
 rm -f $REPACK/ota/system/app/VideoEditor.apk
 rm -f $REPACK/ota/system/app/Term.apk
 
