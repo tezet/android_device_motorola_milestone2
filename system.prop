@@ -86,4 +86,5 @@ hwui.print_config=choice
 # This defines the min duration between two pointer event in ms
 ro.min_pointer_dur=10
 
+persist.sys.usb.config=mass_storage,adb
 
