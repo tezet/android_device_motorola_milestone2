@@ -153,11 +153,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/vold.fstab:system/etc/vold.fstab
 
-# copy all vendor (motorola) kernel modules to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/milestone2/lib/modules &&  \
-	find vendor/motorola/milestone2/lib/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
 # copy all others kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell test -d device/motorola/milestone2/modules && \
 	find device/motorola/milestone2/modules -name '*.ko' \
