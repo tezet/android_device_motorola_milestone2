@@ -328,20 +328,20 @@ key X               {
 }
 key Y               { 
 	label: 'Y'       
-	number: '6'       
+	number: '<'       
 	base: 'y'       
 	shift: 'Y'       
-	alt, capslock: '6'       
-	shift+alt: '6'       
+	alt, capslock: '<'       
+	shift+alt: '<'       
 	ctrl, meta: none
 }
 key Z               { 
 	label: 'Z'       
-	number: '<'       
+	number: '6'       
 	base: 'z'       
 	shift: 'Z'       
-	alt, capslock: '<'       
-	shift+alt: '<'       
+	alt, capslock: '6'       
+	shift+alt: '6'       
 	ctrl, meta: none
 }
 key COMMA           { 

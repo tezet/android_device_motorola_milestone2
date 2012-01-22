@@ -112,11 +112,11 @@ key POUND           {
 }
 key A               { 
 	label: 'A'       
-	number: '!'       
+	number: '1'       
 	base: 'a'       
 	shift: 'A'       
-	alt, capslock: '!'       
-	shift+alt: '!'       
+	alt, capslock: '1'       
+	shift+alt: '1'       
 	ctrl, meta: none
 }
 key B               { 
@@ -256,11 +256,11 @@ key P               {
 }
 key Q               { 
 	label: 'Q'       
-	number: '1'       
+	number: '!'       
 	base: 'q'       
 	shift: 'Q'       
-	alt, capslock: '1'       
-	shift+alt: '1'       
+	alt, capslock: '!'       
+	shift+alt: '!'       
 	ctrl, meta: none
 }
 key R               { 
@@ -310,11 +310,11 @@ key V               {
 }
 key W               { 
 	label: 'W'       
-	number: '2'       
+	number: '<'       
 	base: 'w'       
 	shift: 'W'       
-	alt, capslock: '2'       
-	shift+alt: '2'       
+	alt, capslock: '<'       
+	shift+alt: '<'       
 	ctrl, meta: none
 }
 key X               { 
@@ -337,11 +337,11 @@ key Y               {
 }
 key Z               { 
 	label: 'Z'       
-	number: '<'       
+	number: '2'       
 	base: 'z'       
 	shift: 'Z'       
-	alt, capslock: '<'       
-	shift+alt: '<'       
+	alt, capslock: '2'       
+	shift+alt: '2'       
 	ctrl, meta: none
 }
 key COMMA           { 
