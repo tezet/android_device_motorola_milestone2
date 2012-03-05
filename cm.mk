@@ -37,8 +37,6 @@ UTC_DATE := $(shell date +%s)
 DATE     := $(shell date +%Y%m%d)
 
 PRODUCT_BUILD_PROP_OVERRIDES := \
-BUILD_ID=MILS2_U6_4.1-22 \
-BUILD_DISPLAY_ID="MILS2_U6_4.1-22" \
 PRODUCT_NAME=${PRODUCT_MODEL}_${PRODUCT_SFX} \
 TARGET_DEVICE=milestone2 \
 BUILD_FINGERPRINT=motorola/RTGB/umts_milestone2:2.3.4/MILS2_U6_4.1-22/1317097892:user/release-keys \
