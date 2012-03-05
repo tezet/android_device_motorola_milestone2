@@ -24,7 +24,7 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 BOARD_USES_GENERIC_AUDIO := false
 
 TARGET_NO_RECOVERY := false
@@ -81,7 +81,11 @@ TARGET_USE_OMAP_COMPAT  := true
 BUILD_WITH_TI_AUDIO := 1
 BUILD_PV_VIDEO_ENCODERS := 1
 
+# Camera
+BOARD_USES_CAMERASHIM := true
+BOARD_CAMERA_MOTOROLA_COMPAT := true
 BOARD_CAMERA_LIBRARIES := libcamera
+
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_NO_RGBX_8888 := true
 BOARD_USE_KINETO_COMPATIBILITY := true

@@ -34,23 +34,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.media.capture.flash=led \
 	ro.media.capture.classification=classE \
 	ro.media.capture.useDFR=1 \
-	ro.media.capture.torchIntensity=45 \
-	ro.media.camera.focal=3564.0,3564.0 \
-	ro.media.camera.principal=1632.0,1224.0 \
-	ro.media.camera.skew=0.0 \
-	ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
-	ro.media.camera.calresolution=3264,2448 \
-	ro.com.google.locationfeatures=1 \
 	ro.telephony.call_ring.multiple=false \
 	ro.telephony.call_ring.delay=3000 \
+	ro.com.google.locationfeatures=1 \
 	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=A953 \
-	ro.media.dec.jpeg.memcap=20000000 \
 	ro.media.dec.aud.wma.enabled=1 \
 	ro.media.dec.vid.wmv.enabled=1 \
-	dalvik.vm.lockprof.threshold=500 \
 	ro.kernel.android.checkjni=0 \
+	dalvik.vm.checkjni=false \
+	ro.media.dec.jpeg.memcap=20000000 \
+	dalvik.vm.lockprof.threshold=500 \
 	dalvik.vm.dexopt-data-only=1 \
-	ro.vold.umsdirtyratio=20
+	ro.vold.umsdirtyratio=20 \
+	net.dns1=8.8.8.8 \
+	net.dns2=8.8.4.4
+
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/milestone2/overlay
 
@@ -82,7 +80,7 @@ PRODUCT_PACKAGES += libGLESv2 libEGL libGLESv1_CM
 PRODUCT_PACKAGES += gralloc.default hwcomposer.default
 
 # ICS Camera
-PRODUCT_PACKAGES += Camera overlay.omap3 camera.milestone2 libcamera libui
+PRODUCT_PACKAGES += Camera camera.milestone2 libcamera libui
 
 #Common packages (gingerbread/ics)
 PRODUCT_PACKAGES += \
