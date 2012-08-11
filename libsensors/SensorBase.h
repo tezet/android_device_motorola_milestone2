@@ -46,9 +46,8 @@ protected:
     int close_device();
 
 public:
-            SensorBase(
-                    const char* dev_name,
-                    const char* data_name);
+    SensorBase(const char* dev_name,
+               const char* data_name);
 
     virtual ~SensorBase();
 

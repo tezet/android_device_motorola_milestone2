@@ -2,11 +2,12 @@
 # dont change this file, it is not related to recovery
 #
 # the recovery one  : bootmenu/recovery/recovery.fstab
-# the busybox fstab : prebuilt/etc/busybox.fstab
+# the busybox fstab : etc/busybox.fstab
 #
-# mount point   fstype      device
-/boot           mtd         boot
-/recovery       mtd         recovery
-/system         ext3        system
-/data           ext3        userdata
+# mount point   fstype  device
 
+/system         emmc    /dev/block/platform/omap/omap_hsmmc.1/by-num/p21
+/cache          emmc    /dev/block/platform/omap/omap_hsmmc.1/by-num/p24
+/data           emmc    /dev/block/platform/omap/omap_hsmmc.1/by-num/p26
+/boot           mtd     boot
+/recovery       mtd     recovery

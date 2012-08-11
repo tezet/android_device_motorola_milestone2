@@ -14,9 +14,8 @@
      limitations under the License.
 -->
 
-<resources>
-<!-- ICS
 
+<resources>
     <string-array translatable="false" name="voice_quality_entries">
         <item>@string/voice_quality_entry_normal</item>
         <item>@string/voice_quality_entry_clear</item>
@@ -31,5 +30,4 @@
         <item>Bright</item>
     </string-array>
 
-ICS -->
 </resources>

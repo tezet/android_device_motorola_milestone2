@@ -1,11 +1,14 @@
-#!/system/bin/sh
+#!/system/bootmenu/binary/busybox ash
 
 ######## BootMenu Script
 ######## Execute Pre BootMenu
 
-export PATH=/sbin:/system/xbin:/system/bin
+#We should insmod TLS Module before start bootmenu
+/system/bootmenu/binary/busybox insmod /system/lib/modules/symsearch.ko
+/system/bootmenu/binary/busybox insmod /system/lib/modules/tls-enable.ko
+/system/bootmenu/binary/busybox insmod /system/lib/modules/klogger.ko
 
-PART_CACHE=/dev/block/mmcblk1p24
+source /system/bootmenu/script/_config.sh
 
 ######## Main Script
 
@@ -46,13 +49,14 @@ cp -f /system/bootmenu/binary/lsof /sbin/lsof
 
 $BB chmod +rx /sbin/*
 
-# custom adbd (allow always root)
-cp -f /system/bootmenu/binary/adbd /sbin/adbd.root
-chown 0.0 /sbin/adbd.root
-chmod 4755 /sbin/adbd.root
+# backup original init.rc
+if [ ! -f $BM_ROOTDIR/moto/init.rc ]; then
+    mkdir -p $BM_ROOTDIR/moto
+    cp /*.rc $BM_ROOTDIR/moto/
+fi
 
-# opensource adbd
-cp -f /system/bin/adbd /sbin/adbd
+# custom adbd (allow always root)
+cp -f /system/bootmenu/binary/adbd /sbin/adbd
 chown 0.0  /sbin/adbd
 chmod 4750 /sbin/adbd
 
@@ -62,6 +66,7 @@ chmod 4750 /sbin/adbd
 ## /default.prop replace.. (TODO: check if that works)
 rm -f /default.prop
 cp -f /system/bootmenu/config/default.prop /default.prop
+chmod 640 /default.prop
 
 ## mount cache
 mkdir -p /cache
@@ -73,7 +78,7 @@ fi
 
 # mount cache for boot mode and recovery logs
 if [ ! -d /cache/recovery ]; then
-    mount -t ext3 -o nosuid,nodev,noatime,nodiratime,barrier=1 $PART_CACHE /cache
+    mount -t $FS_CACHE -o nosuid,nodev,noatime,nodiratime,barrier=1 $PART_CACHE /cache
 fi
 
 mkdir -p /cache/bootmenu
@@ -81,6 +86,12 @@ mkdir -p /cache/bootmenu
 # load ondemand safe settings to reduce heat and battery use
 if [ -x /system/bootmenu/script/overclock.sh ]; then
     /system/bootmenu/script/overclock.sh safe
+fi
+
+# must be restored in stock.sh
+if [ -L /tmp ]; then
+  mv /tmp /tmp.bak
+  mkdir /tmp && busybox mount -t ramfs ramfs /tmp
 fi
 
 exit 0

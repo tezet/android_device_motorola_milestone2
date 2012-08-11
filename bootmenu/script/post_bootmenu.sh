@@ -1,4 +1,4 @@
-#!/system/bin/sh
+#!/system/bootmenu/binary/busybox ash
 
 ######## BootMenu Script
 ######## Execute Post BootMenu
@@ -10,7 +10,7 @@ export PATH=/system/xbin:/system/bin:/sbin
 ######## Main Script
 
 # there is a problem, this script is executed if we 
-# exit from recovery...
+# exit from recovery... (init.rc re-start)
 
 echo 0 > /sys/class/leds/blue/brightness
 
@@ -21,42 +21,33 @@ mount -o remount,rw rootfs /
 mount -o remount,rw $PART_SYSTEM /system
 ##################################################
 
+# fast button warning (if this script is used in recovery)
+if [ -e /sbin/recovery ]; then
+    echo 1 > /sys/class/leds/button-backlight/brightness
+    usleep 150000
+    echo 0 > /sys/class/leds/button-backlight/brightness
+    usleep 50000
+    echo 1 > /sys/class/leds/button-backlight/brightness
+    usleep 150000
+    echo 0 > /sys/class/leds/button-backlight/brightness
+    exit 1
+fi
+
 if [ -d /system/bootmenu/init.d ]; then
     chmod 755 /system/bootmenu/init.d/*
-    run-parts /system/bootmenu/init.d/
+    run-parts /system/bootmenu/init.d
 fi
 
-# Clean market cache
-rm -f /data/data/com.android.providers.downloads/cache/*
+# reset any root perms for hwa settings
+chown -R system.nobody /data/local/hwui.deny
+chmod +rw /data/local/hwui.deny/*
 
-# normal cleanup here (need fix in recovery first)
-# ...
-
-
-# fast button warning (to check when script is really used)
-if [ -f /sbin/busybox ]; then
-
-echo 1 > /sys/class/leds/button-backlight/brightness
-usleep 50000
-echo 0 > /sys/class/leds/button-backlight/brightness
-usleep 50000
-echo 1 > /sys/class/leds/button-backlight/brightness
-usleep 50000
-echo 0 > /sys/class/leds/button-backlight/brightness
-usleep 50000
-echo 1 > /sys/class/leds/button-backlight/brightness
-usleep 50000
-echo 0 > /sys/class/leds/button-backlight/brightness
-
-exit 1
-
-fi
+# adb shell
+ln -s /system/xbin/busybox /sbin/sh
 
 ######## Don't Delete.... ########################
 mount -o remount,ro rootfs /
 mount -o remount,ro $PART_SYSTEM /system
 ##################################################
-
-chmod 755 /system/etc/init.d/*
 
 exit 0

@@ -1,4 +1,4 @@
-# Copyright (C) 2008 The Android Open Source Project
+# Copyright (C) 2011 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ LOCAL_SRC_FILES := lights.c
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
-LOCAL_SHARED_LIBRARIES := liblog libcutils
+LOCAL_SHARED_LIBRARIES := liblog 
 
-LOCAL_MODULE := lights.milestone2
-LOCAL_MODULE_TAGS:= optional
+LOCAL_MODULE := lights.$(TARGET_BOOTLOADER_BOARD_NAME)
+LOCAL_MODULE_TAGS := eng debug
 
 include $(BUILD_SHARED_LIBRARY)

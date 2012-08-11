@@ -21,28 +21,12 @@
 # lines, full and toro, hence its name.
 #
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        LiveWallpapers \
-        LiveWallpapersPicker \
-        MagicSmokeWallpapers \
-        VisualizationWallpapers \
-        librs_jni
-
-PRODUCT_PROPERTY_OVERRIDES := \
-        net.dns1=8.8.8.8 \
-        net.dns2=8.8.4.4
-
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
-$(call inherit-product, device/motorola/milestone2/milestone2.mk)
-$(call inherit-product-if-exists, vendor/ti/proprietary/omap3/ti-omap3-vendor.mk)
-# Also get non-open-source files if available
-$(call inherit-product-if-exists, vendor/motorola/milestone2/milestone2-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, device/moto/milestone2/device.mk)
 
 PRODUCT_NAME := full_milestone2
 PRODUCT_DEVICE := milestone2
 PRODUCT_BRAND := Android
-PRODUCT_MODEL := Milestone2
+PRODUCT_MODEL := A953
 PRODUCT_MANUFACTURER := motorola

@@ -15,6 +15,5 @@
 
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),milestone2)
 include $(all-subdir-makefiles)
-
-
 endif
+

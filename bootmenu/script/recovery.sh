@@ -5,6 +5,8 @@
 
 source /system/bootmenu/script/_config.sh
 
+export LD_LIBRARY_PATH=.:/sbin
+
 ######## Main Script
 
 ## /tmp folder can be a link to /data/tmp, bad thing !
@@ -28,7 +30,6 @@ chmod 755 /res
 
 cp -r -f /system/bootmenu/recovery/res/* /res/
 cp -p -f /system/bootmenu/recovery/sbin/* /sbin/
-cp -p -f /system/bootmenu/script/recoveryexit.sh /sbin/
 
 if [ ! -f /sbin/recovery ]; then
     ln -s /sbin/recovery_stable /sbin/recovery
@@ -51,7 +52,7 @@ touch /cache/recovery/log
 touch /cache/recovery/last_log
 touch /tmp/recovery.log
 
-killall adbd
+killall -6 adbd
 
 # mount image of pds, for backup purpose (4MB)
 [ ! -d /data/data ] && mount -t ext3 -o rw,noatime,nodiratime,errors=continue $PART_DATA /data
@@ -77,8 +78,7 @@ if [ ! $ret -eq 0 ]; then
    # /system/bootmenu/script/adbd.sh
 
    # don't use adbd here, will load many android process which locks /system
-   killall adbd
-   killall adbd.root
+   killall -6 adbd
 fi
 
 #############################
@@ -102,6 +102,9 @@ echo 0 > /sys/class/leds/blue/brightness
 # turn on button backlight (back button is used in CWM Recovery 3.x)
 echo 1 > /sys/class/leds/button-backlight/brightness
 
+# to allow "eat"
+ln -s /sdcard /mnt/sdcard
+cd /sbin && ln -s adbd adbd.root
 
 /sbin/recovery
 

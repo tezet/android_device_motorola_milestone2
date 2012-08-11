@@ -46,6 +46,9 @@
 
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/M2Parts_intermediates)
 
+# For the sensors lib, its better to rebuild it on defy/defy+ switch
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/sensors.milestone2_intermediates)
+
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************

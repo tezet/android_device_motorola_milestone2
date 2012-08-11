@@ -15,12 +15,6 @@ if [ "$R" = "recovery" ]; then
 
 fi
 
-if [ "$R" = "bootloader" ]; then
-
-  echo "bootmenu" > $BM_CONFIG
-
-fi
-
 if [ "$R" = "bootmenu" ]; then
 
   echo "bootmenu" > $BM_CONFIG
@@ -35,6 +29,8 @@ fi
 
 if [ -z "$R" ]; then
   rm -f $BM_CONFIG
+else
+  echo $R > $BM_CONFIG
 fi
 
 sync

@@ -1,15 +1,26 @@
 symsearch.ko:
+clockfix.ko: symsearch.ko
 usbled.ko: symsearch.ko
 mmcfix.ko: symsearch.ko
 backlight.ko: symsearch.ko
 gpiofix.ko: symsearch.ko
+logcap.ko: symsearch.ko
 qtouch_num.ko: symsearch.ko
+debounce.ko:
+proximity.ko: symsearch.ko
+ionpvr.ko: symsearch.ko
+pvroff.ko: symsearch.ko
+pvrsrvkm.ko:
+omaplfb.ko: pvrsrvkm.ko
+ion.ko: symsearch.ko ionpvr.ko
+klogger.ko:
+thumbee.ko:
+sysfs_egl.ko:
 wl127x_test.ko:
 vpnclient.ko:
 tun.ko:
 tiwlan_drv.ko:
 tiap_drv.ko:
-slow-work.ko:
 sec.ko:
 sch_ingress.ko:
 sch_htb.ko:
@@ -25,18 +36,32 @@ em_u32.ko:
 dummy.ko:
 cls_u32.ko:
 cifs.ko: nls_utf8.ko
+ext4.ko: jbd2.ko
+jbd2.ko:
 act_police.ko:
 act_mirred.ko:
 act_gact.ko:
+overclock_defy.ko:
 cpufreq_stats.ko:
 cpufreq_smartass.ko: symsearch.ko
 cpufreq_interactive.ko: symsearch.ko cpufreq_stats.ko
+cpufreq_boosted.ko: symsearch.ko
 cpufreq_conservative.ko:
-debounce.ko:
+sio_iosched.ko:
+iptable_mangle.ko:
+iptable_raw.ko:
+ip6table_raw.ko: ip6_tables.ko
+ip6table_mangle.ko: ip6_tables.ko
+ip6table_filter.ko: ip6_tables.ko
+ip6_tables.ko:
 xt_owner2:
 xt_quota2:
 xt_multiport.ko:
+ip6t_REJECT.ko:
+ip6t_LOG.ko: ip6_tables.ko
+xt_tcpmss.ko:
+xt_TCPMSS.ko:
 camise.ko:
 camera.ko: symsearch.ko camise.ko
-ip6_tables.ko:
+android_usb.ko:
 

@@ -8,3 +8,9 @@ assert(package_extract_file("devtree.img", "/tmp/devtree.img"),
        write_raw_image("/tmp/devtree.img", "/dev/block/mmcblk1p12"),
        delete("/tmp/devtree.img"));
 
+mount("ext3", "EMMC", "/dev/block/mmcblk1p26", "/data");
+delete_recursive("/data/dalvik-cache");
+
+delete("/data/data/com.android.providers.telephony/databases/telephony.db");
+delete("/data/data/com.android.deskclock/databases/alarms.db");
+
