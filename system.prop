@@ -91,6 +91,8 @@ dev.pm.dyn_samplingrate=1
 persist.sys.charge_led=white
 # use default multitouch configuration
 persist.sys.qtouch_num=2
+# primary keycharmap
+persist.sys.keypad_type=qwerty
 # Shutter sound enabled
 persist.sys.camera-mute=0
 # enable adbd during first boot (for dalvik cache problems)
