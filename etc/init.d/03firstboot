@@ -6,6 +6,15 @@ if [ -f /system/firstboot ]; then
 
     busybox mount -o remount,rw /system
     rm -f /system/firstboot
+    
+    #select appropriate usbd
+	if [ -f /proc/socinfo ]; then
+		mv /system/bin/usbd.gb /system/bin/usbd
+		rm /system/bin/usbd.froyo
+	else
+		mv /system/bin/usbd.froyo /system/bin/usbd
+		rm /system/bin/usbd.gb
+	fi
 
     # Clean market cache
     rm -f /data/data/com.android.providers.downloads/cache/*
