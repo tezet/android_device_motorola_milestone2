@@ -8,7 +8,7 @@ MAJOR=252
 HOOK=0
 
 if [ -f /proc/socinfo ]; then
-   MAJOR=246
+   MAJOR=247
    HOOK=1
 fi
 
