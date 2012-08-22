@@ -96,7 +96,7 @@ get_address()
 install_module()
 {
   # load module
-  insmod $MODULE_DIR/overclock_milestone2.ko omap2_clk_init_cpufreq_table_addr=0x$cpufreq_table
+  insmod $MODULE_DIR/overclock_milestone.ko omap2_clk_init_cpufreq_table_addr=0x$cpufreq_table
   #set cpufreq_stats_update_addr
   echo 0x$stats_update > /proc/overclock/cpufreq_stats_update_addr
   if [ $load_all -eq 1 ]; then
