@@ -6,7 +6,6 @@
 #We should insmod TLS Module before start bootmenu
 /system/bootmenu/binary/busybox insmod /system/lib/modules/symsearch.ko
 /system/bootmenu/binary/busybox insmod /system/lib/modules/tls-enable.ko
-/system/bootmenu/binary/busybox insmod /system/lib/modules/klogger.ko
 
 source /system/bootmenu/script/_config.sh
 

@@ -1,23 +1,21 @@
-#!/sbin/busybox ash
+#!/sbin/sh
 
 ######## BootMenu Script
 ######## Execute [2nd-boot] Menu
+
+export PATH=/sbin:/system/xbin:/system/bin
 
 source /system/bootmenu/script/_config.sh
 
 ######## Main Script
 
-toolbox mount -o remount,rw rootfs /
+mount -o remount,rw /
 rm -f /*.rc
-rm -f /*.sh
 rm -f /osh
 rm -rf /preinstall
-cp -f /system/bootmenu/2nd-boot/* /
+cp -r -f /system/bootmenu/2nd-boot/* /
 chmod 640 /*.rc
 chmod 750 /init
-rm -f /sbin/ueventd
-ln -s /init /sbin/ueventd
-cp -f /system/bootmenu/binary/adbd /sbin/adbd
 killall ueventd
 
 ADBD_RUNNING=`ps | grep adbd | grep -v grep`
@@ -27,16 +25,13 @@ fi
 
 # original /tmp data symlink
 if [ -L /tmp.bak ]; then
-    rm /tmp.bak
+  rm /tmp.bak
 fi
 
 if [ -L /sdcard-ext ]; then
     rm /sdcard-ext
     mkdir -p /sd-ext
 fi
-
-busybox mkdir -p /storage
-ln -s /mnt/sdcard /storage/sdcard0
 
 ## unmount devices
 sync
@@ -46,14 +41,13 @@ umount /dev/pts
 umount /mnt/asec
 umount /mnt/obb
 umount /cache
+umount /data/tmp
 umount /data
-
-## adbd shell
-ln -s /system/xbin/bash /sbin/sh
+mount -o remount,rw,relatime,mode=775,size=128k /dev
 
 ######## Cleanup
 
-rm -f /sbin/lsof
+rm /sbin/lsof
 
 ## busybox cleanup..
 if [ -f /sbin/busybox ]; then
@@ -64,8 +58,12 @@ if [ -f /sbin/busybox ]; then
     rm -f /sbin/busybox
 fi
 
+## adbd shell
+ln -s /system/xbin/bash /sbin/sh
+
 ## reduce lcd backlight to save battery
 echo 18 > /sys/class/leds/lcd-backlight/brightness
+
 
 ######## Let's go
 

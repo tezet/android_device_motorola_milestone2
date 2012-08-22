@@ -20,7 +20,6 @@
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product, vendor/motorola/milestone2/milestone2-vendor.mk)
 
@@ -98,7 +97,7 @@ PRODUCT_PACKAGES += librs_jni
 PRODUCT_PACKAGES += DroidSSHd dropbear dropbearkey sftp-server scp ssh rsync
 
 # CM9 apps
-PRODUCT_PACKAGES += FileManager Torch HwaSettings make_ext4fs RomUpdater
+PRODUCT_PACKAGES += FileManager Torch HwaSettings make_ext4fs
 
 # Experimental TI OpenLink
 PRODUCT_PACKAGES += libnl_2 iw
@@ -128,5 +127,5 @@ $(call inherit-product, build/target/product/full_base.mk)
 PRODUCT_LOCALES += hdpi
 
 PRODUCT_NAME := full_milestone2
-PRODUCT_DEVICE := MB52x
+PRODUCT_DEVICE := A953
 
