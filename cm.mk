@@ -43,3 +43,12 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_NUMBER=${DATE} \
     BUILD_VERSION_TAGS=release-keys \
     TARGET_BUILD_TYPE=user
+
+# OTA updater
+PRODUCT_PROPERTY_OVERRIDES += \
+	otaupdater.otaid=m2_cm10 \
+	otaupdater.otatime=$(shell date +%Y%m%d-%H%M) \
+	otaupdater.otaver=$(shell date +%Y-%m-%d_%H_%M) \
+	otaupdater.sdcard.os=sdcard \
+	otaupdater.sdcard.recovery=sdcard
+

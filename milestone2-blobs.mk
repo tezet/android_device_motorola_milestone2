@@ -74,4 +74,8 @@ PRODUCT_COPY_FILES += \
 
 endif
 
+# Copy prebuilt apps
+PRODUCT_COPY_FILES += \
+	${device_path}/app/OTAUpdater.apk:system/app/OTAUpdater.apk
+
 #end of milestone2-blobs.mk
