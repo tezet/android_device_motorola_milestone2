@@ -16,9 +16,9 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- RomUpdater link -->
-    <string name="additional_system_update">org.elegosproject.romupdater</string>
-    <string name="additional_system_update_menu">org.elegosproject.romupdater.ROMUpdater</string>
+    <!-- OTA updater link -->
+    <string name="additional_system_update">com.updater.ota</string>
+    <string name="additional_system_update_menu">com.updater.ota.OTAUpdaterActivity</string>
 
 </resources>
 
