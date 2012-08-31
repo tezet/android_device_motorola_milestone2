@@ -4,14 +4,6 @@
     <PreferenceCategory android:key="general"
                         android:title="@string/general_settings_title">
                         
-        <!-- Keypad type -->
-        <ListPreference android:key="keypad_type"
-                        android:persistent="false"
-                        android:title="@string/keypad_type_title"
-                        android:summary="@string/keypad_type_summary"
-                        android:entries="@array/keypad_type_entries"
-                        android:entryValues="@array/keypad_type_values" />
-
         <!-- Charge LED mode -->
         <ListPreference android:key="charge_led_mode"
                         android:persistent="false"

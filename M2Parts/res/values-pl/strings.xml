@@ -5,15 +5,6 @@
 
     <string name="general_settings_title">Ustawienia ogólne</string>
 
-    <string name="keypad_type_title">Układ klawiatury</string>
-    <string name="keypad_type_summary">Wybierz układ klawiatury (wymaga restartu)</string>
-    <string name="keypad_type_qwerty">QWERTY</string>
-    <string name="keypad_type_qwertz">QWERTZ</string>
-    <string name="keypad_type_azerty">AZERTY</string>
-    
-    <string name="keypad_type_warning_title">Uwaga</string>
-    <string name="keypad_type_warning_message">Telefon wymaga ponownego uruchomienia aby zatwierdzić zmiany.\nJesteś pweien?</string>
-    
     <string name="charge_led_mode_title">Dostosowanie diody LED</string>
     <string name="charge_led_mode_summary">Ustawienia diody LED podczas ładowania</string>
     <string name="charge_led_mode_white">Biała LED</string>

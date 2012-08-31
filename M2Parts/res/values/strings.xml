@@ -4,16 +4,7 @@
     <string name="app_name">Milestone 2 Settings</string>
 
     <string name="general_settings_title">General Settings</string>
-
-    <string name="keypad_type_title">Keypad type</string>
-    <string name="keypad_type_summary">Select keypad type (needs restart)</string>
-    <string name="keypad_type_qwerty">QWERTY</string>
-    <string name="keypad_type_qwertz">QWERTZ</string>
-    <string name="keypad_type_azerty">AZERTY</string>
-    
-    <string name="keypad_type_warning_title">Warning</string>
-    <string name="keypad_type_warning_message">The phone must be restarted for changes to take effect.\nAre you sure you want to change the setting?</string>
-    
+ 
     <string name="charge_led_mode_title">Charge LED mode</string>
     <string name="charge_led_mode_summary">Adjust the behavior of the notification LED during charging</string>
     <string name="charge_led_mode_white">White LED</string>

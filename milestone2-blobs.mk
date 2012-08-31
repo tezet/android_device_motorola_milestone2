@@ -20,9 +20,9 @@ PRODUCT_COPY_FILES += \
 	
 # Key layouts, names must fit the ones in /proc/bus/input/devices, qwerty.kl is the fallback one.
 PRODUCT_COPY_FILES += \
-	$(device_path)/usr/keylayout/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
-	$(device_path)/usr/keylayout/umts_milestone2-keypad-qwerty.kl:system/usr/keylayout/sholes-keypad.kl \
-	$(device_path)/usr/keychars/umts_milestone2-keypad-qwerty.kcm:system/usr/keychars/sholes-keypad.kcm
+	$(device_path)/usr/keylayout/sholes-keypad.kl:system/usr/keylayout/qtouch-touchscreen.kl \
+	$(device_path)/usr/keylayout/sholes-keypad.kl:system/usr/keylayout/sholes-keypad.kl \
+	$(device_path)/usr/keychars/sholes-keypad.kcm:system/usr/keychars/sholes-keypad.kcm
 		
 # copy all idc files
 PRODUCT_COPY_FILES += $(shell test -d device/moto/milestone2/usr/idc/ &&  \
@@ -45,7 +45,6 @@ PRODUCT_COPY_FILES += \
 	${device_path}/modules/modules.alias:system/lib/modules/modules.alias \
 	${device_path}/modules/modules.dep:system/lib/modules/modules.dep \
 	$(device_path)/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-	$(device_path)/etc/init.d/02qwerty:system/etc/init.d/02qwerty \
 	$(device_path)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
 	$(device_path)/etc/init.d/04filesystems:system/etc/init.d/04filesystems \
 	$(device_path)/etc/init.d/05mountsd:system/etc/init.d/05mountsd \

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Name of the application. [CHAR LIMIT=35] -->
+    <string name="app_label">Input Devices</string>
+
+    <!-- Keyboard layouts label, used to describe the set of all built-in layouts in the UI. [CHAR LIMIT=35] -->
+    <string name="keyboard_layouts_label">Milestone 2 keyboard</string>
+
+    <!-- AZERTY keyboard layout label. [CHAR LIMIT=35] -->
+    <add-resource type="string" name="keyboard_layout_azerty_label"></add-resource>
+    <string name="keyboard_layout_azerty_label">AZERTY</string>
+
+    <!-- QWERTY keyboard layout label. [CHAR LIMIT=35] -->
+    <add-resource type="string" name="keyboard_layout_qwerty_label"></add-resource>
+    <string name="keyboard_layout_qwerty_label">QWERTY</string>
+
+    <!-- QWERTZ keyboard layout label. [CHAR LIMIT=35] -->
+    <add-resource type="string" name="keyboard_layout_qwertz_label"></add-resource>
+    <string name="keyboard_layout_qwertz_label">QWERTZ</string>
+</resources>

@@ -1,122 +1,31 @@
-type ALPHA
+# Copyright (C) 2012 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-### Basic QWERTY keys ###
+#
+# QWERTZ keyboard layout.
+# For Motorola Milestone 2
+#
 
-key 0               { 
-	label: '0'       
-	number: '0'       
-	base: '0'       
-	shift, capslock: ')'       
-	alt, numlock: ')'       
-	shift+alt: ')'       
-	ctrl, meta: none
-}
-key 1               { 
-	label: '1'       
-	number: '1'       
-	base: '1'       
-	shift, capslock: '!'       
-	alt, numlock: '!'       
-	shift+alt: '!'       
-	ctrl, meta: none
-}
-key 2               { 
-	label: '2'       
-	number: '2'       
-	base: '2'       
-	shift, capslock: '"'       
-	alt, numlock: '"'       
-	shift+alt: '"'       
-	ctrl, meta: none
-}
-key 3               { 
-	label: '3'       
-	number: '3'       
-	base: '3'       
-	shift, capslock: '#'       
-	alt, numlock: '#'       
-	shift+alt: '#'       
-	ctrl, meta: none
-}
-key 4               { 
-	label: '4'       
-	number: '4'       
-	base: '4'       
-	shift, capslock: '$'       
-	alt, numlock: '$'       
-	shift+alt: '$'       
-	ctrl, meta: none
-}
-key 5               { 
-	label: '5'       
-	number: '5'       
-	base: '5'       
-	shift, capslock: '%'       
-	alt, numlock: '%'       
-	shift+alt: '%'       
-	ctrl, meta: none
-}
-key 6               { 
-	label: '6'       
-	number: '6'       
-	base: '6'       
-	shift, capslock: '^'       
-	alt, numlock: '^'       
-	shift+alt: '^'       
-	ctrl, meta: none
-}
-key 7               { 
-	label: '7'       
-	number: '7'       
-	base: '7'       
-	shift, capslock: '&'       
-	alt, numlock: '&'       
-	shift+alt: '&'       
-	ctrl, meta: none
-}
-key 8               { 
-	label: '8'       
-	number: '8'       
-	base: '8'       
-	shift, capslock: '*'       
-	alt, numlock: '*'       
-	shift+alt: '*'       
-	ctrl, meta: none
-}
-key 9               { 
-	label: '9'       
-	number: '9'       
-	base: '9'       
-	shift, capslock: '('       
-	alt, numlock: '('       
-	shift+alt: '('       
-	ctrl, meta: none
-}
-key STAR            { 
-	label: '*'       
-	number: '*'       
-	base: '*'       
-	shift, capslock: '*'       
-	alt, numlock: '*'       
-	shift+alt: '*'       
-	ctrl, meta: none
-}
-key POUND           { 
-	label: '#'       
-	number: '#'       
-	base: '#'       
-	shift, capslock: '#'       
-	alt, numlock: '#'       
-	shift+alt: '#'       
-	ctrl, meta: none
-}
+type OVERLAY
+
 key A               { 
 	label: 'A'       
-	number: '1'       
+	number: '!'       
 	base: 'a'       
 	shift, capslock: 'A'       
-	alt, numlock: '1'       
-	shift+alt: '1'       
+	alt, numlock: '!'       
+	shift+alt: '\u00e4' 
 	ctrl, meta: none
 }
 key B               { 
@@ -139,11 +48,11 @@ key C               {
 }
 key D               { 
 	label: 'D'       
-	number: '\u20ac'       
+	number: '$'       
 	base: 'd'       
 	shift, capslock: 'D'       
-	alt, numlock: '\u20ac'       
-	shift+alt: '\u20ac'       
+	alt, numlock: '$'       
+	shift+alt: '$'       
 	ctrl, meta: none
 }
 key E               { 
@@ -256,11 +165,11 @@ key P               {
 }
 key Q               { 
 	label: 'Q'       
-	number: '!'       
+	number: '1'       
 	base: 'q'       
 	shift, capslock: 'Q'       
-	alt, numlock: '!'       
-	shift+alt: '!'       
+	alt, numlock: '1'       
+	shift+alt: '1'       
 	ctrl, meta: none
 }
 key R               { 
@@ -278,7 +187,7 @@ key S               {
 	base: 's'       
 	shift, capslock: 'S'       
 	alt, numlock: '#'       
-	shift+alt: '#'       
+	shift+alt: '\u00df'  
 	ctrl, meta: none
 }
 key T               { 
@@ -296,7 +205,7 @@ key U               {
 	base: 'u'       
 	shift, capslock: 'U'       
 	alt, numlock: '7'       
-	shift+alt: '7'       
+	shift+alt: '\u00fc'
 	ctrl, meta: none
 }
 key V               { 
@@ -310,11 +219,11 @@ key V               {
 }
 key W               { 
 	label: 'W'       
-	number: '<'       
+	number: '2'       
 	base: 'w'       
 	shift, capslock: 'W'       
-	alt, numlock: '<'       
-	shift+alt: '<'       
+	alt, numlock: '2'       
+	shift+alt: '2'       
 	ctrl, meta: none
 }
 key X               { 
@@ -327,21 +236,21 @@ key X               {
 	ctrl, meta: none
 }
 key Y               { 
-	label: 'Y'       
+	label: 'Z'       
 	number: '6'       
-	base: 'y'       
-	shift, capslock: 'Y'       
+	base: 'z'       
+	shift, capslock: 'Z'       
 	alt, numlock: '6'       
 	shift+alt: '6'       
 	ctrl, meta: none
 }
 key Z               { 
-	label: 'Z'       
-	number: '2'       
-	base: 'z'       
-	shift, capslock: 'Z'       
-	alt, numlock: '2'       
-	shift+alt: '2'       
+	label: 'Y'       
+	number: '<'       
+	base: 'y'       
+	shift, capslock: 'Y'       
+	alt, numlock: '<'       
+	shift+alt: '<'       
 	ctrl, meta: none
 }
 key COMMA           { 
@@ -363,10 +272,10 @@ key PERIOD          {
 	ctrl, meta: none
 }
 key TAB             { 
-	label: '\u20ac'    
+	label: '\t'    
 	number: '~'       
-	base: '\u20ac'       
-	shift, capslock: '\u20ac'       
+	base: '\t'       
+	shift, capslock: '\t'       
 	alt, numlock: '~'       
 	shift+alt: '~'       
 	ctrl, meta: none

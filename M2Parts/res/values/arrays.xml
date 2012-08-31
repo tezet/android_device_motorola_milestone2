@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="keypad_type_entries">
-        <item>@string/keypad_type_qwerty</item>
-        <item>@string/keypad_type_qwertz</item>
-        <item>@string/keypad_type_azerty</item>
-    </string-array>
-    
-    <string-array name="keypad_type_values">
-        <item>qwerty</item>
-        <item>qwertz</item>
-        <item>azerty</item>
-    </string-array>
-
     <string-array name="charge_led_mode_entries">
         <item>@string/charge_led_mode_white</item>
         <item>@string/charge_led_mode_rgb</item>
