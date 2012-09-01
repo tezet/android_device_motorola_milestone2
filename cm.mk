@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-TARGET_BOOTANIMATION_NAME := vertical-480x854
+TARGET_BOOTANIMATION_NAME := vertical-480
 
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
