@@ -42,7 +42,6 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/modules/modules.alias:system/lib/modules/modules.alias \
 	device/motorola/milestone2/modules/modules.dep:system/lib/modules/modules.dep
 
-
 ifdef CYANOGEN_RELEASE
 	PRODUCT_COPY_FILES += device/motorola/milestone2/custom_backup_release.txt:system/etc/custom_backup_list.txt
 else
@@ -135,3 +134,8 @@ PRODUCT_COPY_FILES += \
 	device/motorola/milestone2/modules/cpufreq_smartass.ko:system/bootmenu/ext/modules/cpufreq_smartass.ko \
 	device/motorola/milestone2/modules/cpufreq_stats.ko:system/bootmenu/ext/modules/cpufreq_stats.ko \
 	device/motorola/milestone2/modules/symsearch.ko:system/bootmenu/ext/modules/symsearch.ko
+	
+# Copy prebuilt apps
+PRODUCT_COPY_FILES += \
+	device/motorola/milestone2/prebuilt/app/OTAUpdater.apk:system/app/OTAUpdater.apk
+
