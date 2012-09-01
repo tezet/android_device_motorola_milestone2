@@ -15,6 +15,15 @@ if [ -f /system/firstboot ]; then
 		mv /system/bin/usbd.froyo /system/bin/usbd
 		rm /system/bin/usbd.gb
 	fi
+	
+    #select appropriate battd
+	if [ -f /proc/socinfo ]; then
+		mv /system/bin/battd.gb /system/bin/battd
+		rm /system/bin/battd.froyo
+	else
+		mv /system/bin/battd.froyo /system/bin/battd
+		rm /system/bin/battd.gb
+	fi
 
     # Clean market cache
     rm -f /data/data/com.android.providers.downloads/cache/*
