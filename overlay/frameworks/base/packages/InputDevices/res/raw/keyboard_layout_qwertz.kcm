@@ -151,7 +151,7 @@ key O               {
 	base: 'o'       
 	shift, capslock: 'O'       
 	alt, numlock: '9'       
-	shift+alt: '9'       
+	shift+alt: '\u00f6'   
 	ctrl, meta: none
 }
 key P               { 
