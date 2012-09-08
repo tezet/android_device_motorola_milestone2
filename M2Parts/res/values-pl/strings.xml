@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ustawienia urządzenia</string>
+    <string name="app_name">Ustawienia Milestone 2</string>
 
     <string name="general_settings_title">Ustawienia ogólne</string>
 
@@ -27,5 +27,41 @@
 
     <string name="other_settings_title">Inne ustawienia</string>
     <string name="compass_calibrate">Kalibracja kompasu</string>
+
+    <string name="baseband_selection">Wybór oprogramowania radia (bpsw)</string>
+
+    <string name="reboot_prompt_title">Wymagany restart</string>
+    <string name="reboot_prompt_message">Aby zastosować zmiany, wymagane jest ponowne uruchomienie.\n\nCzy uruchomić ponownie teraz?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+
+    <string name="region_europe">Europa</string>
+    <string name="region_america">Ameryka</string>
+    <string name="region_asia">Azja</string>
+    <string name="region_africa">Afryka</string>
+    <string name="region_australia">Australia</string>
+
+    <string name="country_central_europe">Europa środkowa</string>
+    <string name="country_france">Francja</string>
+    <string name="country_great_britain">Wielka Brytania</string>
+    <string name="country_italy">Włochy</string>
+    <string name="country_poland">Polska</string>
+    <string name="country_usa">USA</string>
+    <string name="country_brasil">Brazylia</string>
+    <string name="country_argentina">Argentyna</string>
+    <string name="country_colombia">Kolumbia</string>
+    <string name="country_china">Chiny</string>
+    <string name="country_south_korea">Korea Południowa</string>
+    <string name="country_hongkong_taiwan">Hongkong, Tajwan</string>
+    <string name="country_south_east_asia">Azja południowo-wschodnia</string>
+    <string name="country_arabia">Arabia</string>
+    <string name="country_south_africa">Południowa Afryka</string>
+
+    <string name="baseband_selection_summary">Wybierz radio odpowiednie do twojego kraju\nObecnie wybrane: %1$s %2$s</string>
+    <string name="baseband_region">Region</string>
+    <string name="baseband_country">Kraj</string>
+    <string name="baseband_version">Wersja</string>
+    <string name="baseband_frequencies">Częstotliwości: %1$s MHz</string>
+    <string name="unknown">Nieznane</string>
 
 </resources>

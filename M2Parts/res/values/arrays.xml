@@ -28,5 +28,66 @@
         <item>5</item>
         <item>8</item>
     </string-array>
+    
+    <string-array name="baseband_region_entries" translatable="false">
+        <item>@string/region_europe</item>
+        <item>@string/region_america</item>
+        <item>@string/region_asia</item>
+    </string-array>
+
+    <string-array name="baseband_region_values" translatable="false">
+        <item>europe</item>
+        <item>america</item>
+        <item>asia</item>
+    </string-array>
+
+    <string-array name="baseband_countries_europe_entries" translatable="false">
+        <item>@string/country_great_britain</item>
+    </string-array>
+
+    <string-array name="baseband_countries_europe_values" translatable="false">
+        <item>uk</item>
+    </string-array>
+
+    <string-array name="baseband_countries_america_entries" translatable="false">
+        <item>@string/country_brasil</item>
+    </string-array>
+
+    <string-array name="baseband_countries_america_values" translatable="false">
+        <item>brasil</item>
+    </string-array>
+
+    <string-array name="baseband_countries_asia_entries" translatable="false">
+        <item>@string/country_china</item>
+    </string-array>
+
+    <string-array name="baseband_countries_asia_values" translatable="false">
+        <item>china</item>
+    </string-array>
+
+    <string-array name="baseband_countries_africa_entries" translatable="false">
+        <item>@string/country_south_africa</item>
+    </string-array>
+
+    <string-array name="baseband_countries_africa_values" translatable="false">
+        <item>southafrica</item>
+    </string-array>
+
+    <string-array name="baseband_countries_australia_entries" translatable="false">
+        <item>@string/region_australia</item>
+    </string-array>
+
+    <string-array name="baseband_countries_australia_values" translatable="false">
+        <item>australia</item>
+    </string-array>
+
+    <string-array name="available_basebands" translatable="false">
+        <!-- each item has the format region:country:version:frequencies:directory name:File_GSM md5sum -->
+        <item>america:brasil:2.3.6:850,2100:america/br_236:542d4e07b49453067d43daece136b832</item>
+        <item>asia:china:2.2.1:850,2100:asia/ch_221:0feb9b931efaea25cc6e0f417b2a5e78</item>
+        <item>asia:china:2.3.4:850,2100:asia/ch_234:11a075298d02e6899010734c6f90bb61</item>
+        <item>europe:uk:2.2.1:900,2100:europe/uk_221:5db4fcaaefd4f916269c29a1eff0cb69</item>
+        <item>europe:uk:2.3.4:900,2100:europe/uk_234:b708b8c04def63ae3505815ee555c84e</item>
+    </string-array>
 
 </resources>

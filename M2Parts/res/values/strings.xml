@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_shortname" translatable="false">Milestone 2 Settings</string>
+    <string name="app_shortname" translatable="false">Milestone 2 Parts</string>
+
     <string name="app_name">Milestone 2 Settings</string>
 
     <string name="general_settings_title">General Settings</string>
- 
+
     <string name="charge_led_mode_title">Charge LED mode</string>
     <string name="charge_led_mode_summary">Adjust the behavior of the notification LED during charging</string>
     <string name="charge_led_mode_white">White LED</string>
@@ -15,7 +16,7 @@
     <string name="button_brightness_scale_summary">Allows reducing the button brightness, especially useful when using manual brightness</string>
 
     <string name="touch_points_title">Multi-touch points</string>
-    <string name="touch_points_summary">Adjust the number of multi-touch points registered by the system  (needs restart)</string>
+    <string name="touch_points_summary">Adjust the number of multi-touch points registered by the system</string>
     <string name="touch_point_entry_2points">2 points (default)</string>
     <string name="touch_point_entry_3points">3 points</string>
     <string name="touch_point_entry_4points">4 points</string>
@@ -31,4 +32,39 @@
     <string name="other_settings_title">Other settings</string>
     <string name="compass_calibrate">Compass calibrator</string>
 
+    <string name="baseband_selection">Baseband selection</string>
+
+    <string name="reboot_prompt_title">Reboot required</string>
+    <string name="reboot_prompt_message">In order to apply the changed configuration, a reboot is required.\n\nDo you want to reboot now?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="region_europe">Europe</string>
+    <string name="region_america">America</string>
+    <string name="region_asia">Asia</string>
+    <string name="region_africa">Africa</string>
+    <string name="region_australia">Australia</string>
+
+    <string name="country_central_europe">Central Europe</string>
+    <string name="country_france">France</string>
+    <string name="country_great_britain">Great Britain</string>
+    <string name="country_italy">Italy</string>
+    <string name="country_poland">Poland</string>
+    <string name="country_usa">USA</string>
+    <string name="country_brasil">Brazil</string>
+    <string name="country_argentina">Argentina</string>
+    <string name="country_colombia">Colombia</string>
+    <string name="country_china">China</string>
+    <string name="country_south_korea">South Korea</string>
+    <string name="country_hongkong_taiwan">Hongkong, Taiwan</string>
+    <string name="country_south_east_asia">South East Asia</string>
+    <string name="country_arabia">Arabia</string>
+    <string name="country_south_africa">South Africa</string>
+
+    <string name="baseband_selection_summary">Select the baseband suitable for your country\nCurrently selected: %1$s %2$s</string>
+    <string name="baseband_region">Region</string>
+    <string name="baseband_country">Country</string>
+    <string name="baseband_version">Version</string>
+    <string name="baseband_frequencies">Frequencies: %1$s MHz</string>
+    <string name="unknown">Unknown</string>
 </resources>

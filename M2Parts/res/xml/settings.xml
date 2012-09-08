@@ -31,10 +31,11 @@
                              android:targetPackage="com.bel.android.dspmanager"
                              android:targetClass="com.bel.android.dspmanager.activity.DSPManager" />
         </PreferenceScreen>
-
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/other_settings_title">
+    <PreferenceCategory android:key="other"
+                        android:title="@string/other_settings_title">
+
         <PreferenceScreen android:key="compass_calibrate"
                           android:title="@string/compass_calibrate">
                           <intent
@@ -42,6 +43,12 @@
                              android:targetPackage="com.motorola.CompassCalibrate"
                              android:targetClass="com.motorola.CompassCalibrate.CompassCalibrate" />
         </PreferenceScreen>
+
+        <com.cyanogenmod.settings.device.BasebandSelectionPreference
+                android:key="baseband_selection"
+                android:persistent="false"
+                android:title="@string/baseband_selection" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

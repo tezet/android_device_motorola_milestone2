@@ -45,6 +45,7 @@ PRODUCT_COPY_FILES += \
 	${device_path}/modules/modules.alias:system/lib/modules/modules.alias \
 	${device_path}/modules/modules.dep:system/lib/modules/modules.dep \
 	$(device_path)/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
+	$(device_path)/etc/init.d/02baseband:system/etc/init.d/02baseband \
 	$(device_path)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
 	$(device_path)/etc/init.d/04filesystems:system/etc/init.d/04filesystems \
 	$(device_path)/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
