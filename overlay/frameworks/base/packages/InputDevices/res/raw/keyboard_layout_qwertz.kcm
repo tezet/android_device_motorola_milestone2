@@ -48,11 +48,11 @@ key C               {
 }
 key D               { 
 	label: 'D'       
-	number: '$'       
+	number: '\u20ac'
 	base: 'd'       
 	shift, capslock: 'D'       
-	alt, numlock: '$'       
-	shift+alt: '$'       
+	alt, numlock: '\u20ac'      
+	shift+alt: '\u20ac'       
 	ctrl, meta: none
 }
 key E               { 
@@ -271,7 +271,7 @@ key PERIOD          {
 	shift+alt: ':'       
 	ctrl, meta: none
 }
-key TAB             { 
+key POUND          { 
 	label: '\t'    
 	number: '~'       
 	base: '\t'       
