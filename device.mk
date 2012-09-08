@@ -72,7 +72,7 @@ PRODUCT_PACKAGES += hwcomposer.default
 # Wifi packages
 PRODUCT_PACKAGES += iwmulticall hostap wlan_loader wlan_cu wpa_supplicant
 PRODUCT_PACKAGES += libhostapdcli libCustomWifi libwpa_client libtiOsLib
-PRODUCT_PACKAGES += tiwlan.ini dhcpcd.conf wpa_supplicant.conf hostapd.conf
+PRODUCT_PACKAGES += dhcpcd.conf hostapd.conf
 PRODUCT_PACKAGES += tiap_loader tiap_cu ndc
 
 # OMX stuff
@@ -111,11 +111,6 @@ PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/milestone2/lib/modules && 
 PRODUCT_COPY_FILES += $(shell test -d device/moto/milestone2/modules && \
 	find device/moto/milestone2/modules -name '*.ko' \
 	-printf '%p:system/lib/modules/%f ')
-
-# Prebuilt boot.img
-LOCAL_KERNEL := device/moto/milestone2/kernel
-PRODUCT_COPY_FILES += \
-	$(LOCAL_KERNEL):kernel
 
 # Blobs and bootmenu stuff
 $(call inherit-product, device/moto/milestone2/milestone2-blobs.mk)
