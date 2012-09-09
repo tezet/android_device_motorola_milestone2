@@ -4,9 +4,13 @@
             android:label="@string/keyboard_layout_azerty_label"
             android:keyboardLayout="@raw/keyboard_layout_azerty" />
 
-    <keyboard-layout android:name="keyboard_layout_qwerty"
-            android:label="@string/keyboard_layout_qwerty_label"
-            android:keyboardLayout="@raw/keyboard_layout_qwerty" />
+    <keyboard-layout android:name="keyboard_layout_qwerty_uk"
+            android:label="@string/keyboard_layout_qwerty_uk_label"
+            android:keyboardLayout="@raw/keyboard_layout_qwerty_uk" />
+            
+    <keyboard-layout android:name="keyboard_layout_qwerty_us"
+            android:label="@string/keyboard_layout_qwerty_us_label"
+            android:keyboardLayout="@raw/keyboard_layout_qwerty_us" />
 
     <keyboard-layout android:name="keyboard_layout_qwertz"
             android:label="@string/keyboard_layout_qwertz_label"

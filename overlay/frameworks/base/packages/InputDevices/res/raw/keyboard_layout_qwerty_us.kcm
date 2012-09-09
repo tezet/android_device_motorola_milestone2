@@ -48,10 +48,10 @@ key C               {
 }
 key D               { 
 	label: 'D'       
-	number: '\u00a3'   
+	number: '$'   
 	base: 'd'
 	shift, capslock: 'D'       
-	alt, numlock: '\u00a3'       
+	alt, numlock: '$'       
 	shift+alt: '\u00a3'
 	ctrl, meta: none
 }
@@ -272,10 +272,10 @@ key PERIOD          {
 	ctrl, meta: none
 }
 key POUND          { 
-	label: '\u20ac'    
+	label: '\t'    
 	number: '~'       
-	base: '\u20ac'  
-	shift, capslock: '\u20ac'       
+	base: '\t'  
+	shift, capslock: '\t'       
 	alt, numlock: '~'       
 	shift+alt: '~'       
 	ctrl, meta: none
