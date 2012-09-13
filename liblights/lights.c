@@ -18,7 +18,9 @@
 #define LOG_TAG "lights"
 
 #include <cutils/log.h>
+#include <cutils/properties.h>
 
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
@@ -38,39 +40,43 @@
 
 /******************************************************************************/
 
+#define CHARGE_LED_OFF   0
+#define CHARGE_LED_RGB   1
+#define CHARGE_LED_WHITE 2
+
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
-char const*const LCD_FILE
-        = "/sys/class/leds/lcd-backlight/brightness";
-char const*const ALS_FILE
-        = "/sys/class/leds/lcd-backlight/als";
+static struct light_state_t g_battery;
+static struct light_state_t g_notification;
+static int g_charge_led_active;
+static int g_last_button_brightness;
 
-char const*const KEYBOARD_FILE
-        = "/sys/class/leds/keyboard-backlight/brightness";
-char const*const BUTTON_FILE
-        = "/sys/class/leds/button-backlight/brightness";
 
-/*RGB file descriptors */
-char const*const RED_LED_FILE
-        = "/sys/class/leds/red/brightness";
-char const*const RED_BLINK_FILE
-        = "/sys/class/leds/red/blink";
-char const*const GREEN_LED_FILE
-        = "/sys/class/leds/green/brightness";
-char const*const BLUE_LED_FILE
-        = "/sys/class/leds/blue/brightness";
+char const*const LCD_FILE = "/sys/class/leds/lcd-backlight/brightness";
+char const*const ALS_FILE = "/sys/class/leds/lcd-backlight/als";
+char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
+char const*const KEYBOARD_FILE = "/sys/class/leds/keyboard-backlight/brightness";
+char const*const BUTTON_BRIGHT_FILE = "/proc/backlight/brightness";
 
-static unsigned int colorstate = 0;
-static int blinkstate = 0;
-static unsigned int lastnotificationcolor = 0;
-static int lastnotificationblink = 0;
-static int lowbattery = 0;
+
+/* RGB file descriptors */
+char const*const RED_LED_FILE = "/sys/class/leds/red/brightness";
+char const*const RED_BLINK_FILE = "/sys/class/leds/red/blink";
+char const*const GREEN_LED_FILE = "/sys/class/leds/green/brightness";
+char const*const BLUE_LED_FILE = "/sys/class/leds/blue/brightness";
+char const*const CHARGE_LED_FILE = "/sys/class/leds/usb/brightness";
 
 void init_globals(void)
 {
     // init the mutex
     pthread_mutex_init(&g_lock, NULL);
+    memset(&g_battery, 0, sizeof(g_battery));
+    memset(&g_notification, 0, sizeof(g_notification));
+
+    g_charge_led_active = 0;
+    g_last_button_brightness = -1;
+
 }
 
 static int
@@ -104,9 +110,11 @@ is_lit(struct light_state_t const* state)
 static int
 rgb_to_brightness(struct light_state_t const* state)
 {
-    int color = state->color & 0x00ffffff;
-    return ((77*((color>>16)&0x00ff))
-            + (150*((color>>8)&0x00ff)) + (29*(color&0x00ff))) >> 8;
+    int red = (state->color >> 16) & 0xff;
+    int green = (state->color >> 8) & 0xff;
+    int blue = state->color & 0xff;
+
+    return ((77 * red) + (150 * green) + (29 * blue)) >> 8;
 }
 
 static int
@@ -114,11 +122,10 @@ set_light_backlight(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int err = 0;
+    int brightness = rgb_to_brightness(state);
     int als_mode;
 
-    int brightness = rgb_to_brightness(state);
-
-    switch(state->brightnessMode) {
+    switch (state->brightnessMode) {
         case BRIGHTNESS_MODE_SENSOR:
             als_mode = AUTOMATIC;
             break;
@@ -130,7 +137,9 @@ set_light_backlight(struct light_device_t* dev,
 
     pthread_mutex_lock(&g_lock);
     err = write_int(ALS_FILE, als_mode);
-    err = write_int(LCD_FILE, brightness);
+    if (!err) {
+        err = write_int(LCD_FILE, brightness);
+    }
     pthread_mutex_unlock(&g_lock);
 
     return err;
@@ -155,10 +164,36 @@ set_light_buttons(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int err = 0;
-    int on = is_lit(state);
+    int brightness = rgb_to_brightness(state);
+
+    if (brightness > 0) {
+        char prop[PROPERTY_VALUE_MAX];
+
+        if (property_get("persist.sys.button_brightness", prop, NULL)) {
+            int button_brightness_scale = atoi(prop);
+            if (button_brightness_scale == 0) {
+                brightness = 0;
+            } else if (button_brightness_scale != 100) {
+                brightness = (brightness * button_brightness_scale + 50) / 100;
+            }
+        }
+    }
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(BUTTON_FILE, on ? 255:0);
+
+    if (g_last_button_brightness < 0 ||
+        (g_last_button_brightness == 0 && brightness > 0) ||
+        (g_last_button_brightness > 0 && brightness == 0))
+    {
+        err = write_int(BUTTON_FILE, brightness ? 1 : 0);
+    }
+
+    if (err == 0 && brightness > 0 && brightness != g_last_button_brightness) {
+        err = write_int(BUTTON_BRIGHT_FILE, brightness);
+    }
+
+    g_last_button_brightness = brightness;
+
     pthread_mutex_unlock(&g_lock);
 
     return err;
@@ -166,23 +201,14 @@ set_light_buttons(struct light_device_t* dev,
 }
 
 static int
-set_light_locked(unsigned int color, int blink)
+set_light_locked(struct light_device_t *dev, struct light_state_t *state)
 {
     int err = 0;
     int red, green, blue;
 
-    if(colorstate == color &&
-            blinkstate == blink) {
-        // don't bother changing if we don't have to
-        return 0;
-    } else {
-        colorstate = color;
-        blinkstate = blink;
-    }
-
-    red = (color >> 16) & 0xFF;
-    green = (color >> 8) & 0xFF;
-    blue = color & 0xFF;
+    red = (state->color >> 16) & 0xFF;
+    green = (state->color >> 8) & 0xFF;
+    blue = state->color & 0xFF;
 
     // ensure blinking is off
     err = write_int(RED_BLINK_FILE, 0);
@@ -193,106 +219,81 @@ set_light_locked(unsigned int color, int blink)
     err = write_int(BLUE_LED_FILE, blue);
 
     // blink if supposed to
-    if (blink) {
+    if (state->flashMode != LIGHT_FLASH_NONE) {
         err = write_int(RED_BLINK_FILE, 255);
     }
+
     return err;
+}
+
+
+static int
+handle_light_locked(struct light_device_t *dev)
+{
+    int retval = 0;
+    int show_charge = g_charge_led_active;
+
+    if (is_lit(&g_notification)) {
+        retval = set_light_locked(dev, &g_notification);
+        show_charge = 0;
+    } else {
+        retval = set_light_locked(dev, &g_battery);
+    }
+
+    write_int(CHARGE_LED_FILE, show_charge);
+
+    return retval;
 }
 
 static int
 set_light_battery(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int err = 0;
-    int blink;
+    pthread_mutex_lock(&g_lock);
 
-    switch (state->flashMode) {
-        case LIGHT_FLASH_HARDWARE:
-        case LIGHT_FLASH_TIMED:
-            blink = 1;
-            break;
-        case LIGHT_FLASH_NONE:
-        default:
-            blink = 0;
-            break;
-    }
-#if 0
-    ALOGD("set_light_battery color=%08X, blink=%d****************\n",
-            state->color, blink);
-#endif
-    if (state->color == 0xffff0000) {
-        lowbattery = 1;
-        err = set_light_locked(state->color, blink);
-    } else if (lowbattery == 1) {
-        lowbattery = 0;
-        err = set_light_locked(lastnotificationcolor, lastnotificationblink);
+    g_battery = *state;
+    g_charge_led_active = 0;
+
+    /* if green is set, it means the device is charging -> only
+     * use it if the user wants it */
+    if (state->color & 0xff00) {
+        char prop[PROPERTY_VALUE_MAX];
+
+        property_get("persist.sys.charge_led", prop, "rgb");
+        if (state->color & 0xff0000 && !strcmp(prop, "white")) {
+            /* not pure green -> charging -> use charge LED */
+            g_charge_led_active = 1;
+        }
+        if (g_charge_led_active || !strcmp(prop, "off")) {
+            memset(&g_battery, 0, sizeof(g_battery));
+        }
     }
 
-    return err;
+    handle_light_locked(dev);
+    pthread_mutex_unlock(&g_lock);
+
+    return 0;
 }
+
 
 static int
 set_light_notification(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int err = 0;
-    int blink;
+    pthread_mutex_lock(&g_lock);
+    g_notification = *state;
+    handle_light_locked(dev);
+    pthread_mutex_unlock(&g_lock);
 
-    switch (state->flashMode) {
-       case LIGHT_FLASH_HARDWARE:
-       case LIGHT_FLASH_TIMED:
-            blink = 1;
-            break;
-        case LIGHT_FLASH_NONE:
-        default:
-            blink = 0;
-            break;
-    }
-#if 0
-    ALOGD("set_light_notification color=%08X, blink=%d****************\n",
-            state->color, blink);
-#endif
-    lastnotificationcolor = state->color;
-    lastnotificationblink = blink;
-    if (lowbattery == 0) {
-        err = set_light_locked(state->color, blink);
-    }
-
-    return err;
+    return 0;
 }
 
 static int
 set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    int err = 0;
-
-    /**
-     * we don't have a defined attention light, so ignore these
-     *
-
-    int blink;
-
-    switch (state->flashMode) {
-        case LIGHT_FLASH_HARDWARE:
-        case LIGHT_FLASH_TIMED:
-            blink = 1;
-            break;
-        case LIGHT_FLASH_NONE:
-        default:
-            blink = 0;
-            break;
-    }
-
-    ALOGD("set_light_attention color=%08X, blink=%d****************\n",
-            state->color, blink);
-
-    err = set_light_locked(state->color, blink);
-
-     *
-     */
-
-    return err;
+    /* we don't have an attention light */
+    return 0;
 }
 
 static int
@@ -359,7 +360,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "TI OMAP lights Module",
-    .author = "Google, Inc.",
+    .name = "Milestone2 lights Module",
+    .author = "CyanogenMilestone2, AOSP, Google",
     .methods = &lights_module_methods,
 };
