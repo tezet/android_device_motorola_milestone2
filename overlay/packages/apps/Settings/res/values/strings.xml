@@ -17,8 +17,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- OTA updater link -->
-    <string name="additional_system_update">com.updater.ota</string>
-    <string name="additional_system_update_menu">com.updater.ota.OTAUpdaterActivity</string>
+    <string name="additional_system_update">com.otaupdater</string>
+    <string name="additional_system_update_menu">com.otaupdater.OTAUpdaterActivity</string>
 
 </resources>
 
