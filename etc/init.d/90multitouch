@@ -1,9 +1,5 @@
 #!/system/bin/sh
 #
-# load multitouch module
-
-# Module location
-MODULE="/system/lib/modules/qtouch_num.ko"
 
 # Max number of fingers
 MAX_TOUCH=`getprop persist.sys.qtouch_num`
@@ -12,5 +8,5 @@ if [ -z "$MAX_TOUCH" ]; then
 fi
 
 # Load the module
-insmod $MODULE
-echo $MAX_TOUCH > /proc/qtouch/num_touch
+#insmod $MODULE
+echo $MAX_TOUCH > /proc/multitouch/num
