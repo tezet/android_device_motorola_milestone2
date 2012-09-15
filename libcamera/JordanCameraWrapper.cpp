@@ -141,19 +141,15 @@ JordanCameraWrapper::JordanCameraWrapper(sp<CameraHardwareInterface>& motoInterf
 
 JordanCameraWrapper::~JordanCameraWrapper()
 {
-    if (mCameraType == CAM_SOC) {
-        setSocTorchMode(false);
-        mTorchThread->cancelAndWait();
-        mTorchThread.clear();
-    }
+    setSocTorchMode(false);
+    mTorchThread->cancelAndWait();
+    mTorchThread.clear();
 }
 
 void
 JordanCameraWrapper::toggleTorchIfNeeded()
 {
-    if (mCameraType == CAM_SOC) {
-        setSocTorchMode(mFlashMode == CameraParameters::FLASH_MODE_TORCH);
-    }
+    setSocTorchMode(mFlashMode == CameraParameters::FLASH_MODE_TORCH);
 }
 
 sp<IMemoryHeap>
@@ -312,6 +308,7 @@ JordanCameraWrapper::setOverlay(const sp<Overlay> &overlay)
 void
 JordanCameraWrapper::stopPreview()
 {
+    setSocTorchMode(false);
     mMotoInterface->stopPreview();
 }
 
@@ -350,12 +347,14 @@ JordanCameraWrapper::releaseRecordingFrame(const sp<IMemory>& mem)
 status_t
 JordanCameraWrapper::autoFocus()
 {
+    setSocTorchMode(mFlashMode == CameraParameters::FLASH_MODE_ON);
     return mMotoInterface->autoFocus();
 }
 
 status_t
 JordanCameraWrapper::cancelAutoFocus()
 {
+    setSocTorchMode(false);
     return mMotoInterface->cancelAutoFocus();
 }
 
