@@ -1,4 +1,4 @@
-# Makefile for Android Defy kernel-omap tree
+# Makefile for Android Milestone2 kernel-omap tree
 # "make device_modules" in repo root (not here)
 
 
@@ -6,7 +6,8 @@
 obj-m += symsearch/
 obj-m += overclock/
 obj-m += backlight/
-obj-m += multitouch/
+obj-m += debounce/
+obj-m += qtouch_num/
 obj-m += mmcfix/
 obj-m += gpiofix/
 obj-m += clockfix/
@@ -15,9 +16,6 @@ obj-m += usbled/
 obj-m += netfilter/
 obj-m += thumbee/
 obj-m += qtouch_obp_ts/
-
-# mb525/mb526 specific
-obj-m += proximity/
 obj-m += pvr/
 obj-m += klogger/
 obj-m += tls/
@@ -62,6 +60,6 @@ device_modules:
 	@echo
 	@echo croot
 	@echo . build/envsetup.sh
-	@echo bib mb525
+	@echo bib milestone2
 	@echo make device_modules
 

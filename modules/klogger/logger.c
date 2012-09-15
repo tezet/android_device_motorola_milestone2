@@ -360,7 +360,7 @@ ssize_t klogger_aio_write(struct kiocb *iocb, const struct iovec *iov,
 	header.tid = current->pid;
 	header.sec = now.tv_sec;
 	header.nsec = now.tv_nsec;
-	header.len = min_t(size_t, iocb->ki_left, LOGGER_ENTRY_MAX_PAYLOAD - 1);
+	header.len = min_t(size_t, iocb->ki_left, LOGGER_ENTRY_MAX_PAYLOAD);
 
 	/* null writes succeed, return zero */
 	if (unlikely(!header.len))
@@ -763,5 +763,5 @@ module_exit(klogger_exit);
 MODULE_ALIAS(TAG);
 MODULE_DESCRIPTION("Enhanced adb logger");
 MODULE_AUTHOR("Tanguy Pruvot, CyanogenDefy");
-MODULE_VERSION("2.4");
+MODULE_VERSION("2.3");
 MODULE_LICENSE("GPL");

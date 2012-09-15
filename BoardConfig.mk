@@ -157,9 +157,9 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_BOOTANIMATION_USE_RGB565 := true
 
 # If kernel sources are present in repo, here is the location
-#TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel-omap
+#TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/moto/milestone2
 #TARGET_KERNEL_CONFIG   := mapphone_milestone2_defconfig
 TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/milestone2/kernel
 # Extra : external modules sources
-#TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules
 

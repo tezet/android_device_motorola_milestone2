@@ -8,6 +8,6 @@ sio_iosched-objs = sio-iosched.o
 obj-m += sio_iosched.o
 
 ccflags-y += -DSMARTREFLEX -DOMAP36XX
-overclock_defy-objs := overclock.o
-obj-m += overclock_defy.o
+overclock_milestone2-objs := overclock.o
+obj-m += overclock_milestone2.o
 
