@@ -1,0 +1,7 @@
+0x00000000	PVRGetDisplayClassJTable2	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/pvr/pvrsrvkm	EXPORT_SYMBOL
+0x00000000	lookup_symbol_address	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/symsearch/symsearch	EXPORT_SYMBOL
+0x00000000	cpufreq_stats_freq_update	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/overclock/cpufreq_stats	EXPORT_SYMBOL
+0x00000000	PVRGetBufferClassJTable2	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/pvr/pvrsrvkm	EXPORT_SYMBOL
+0x00000000	qtaguid_get_debug_mask	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/netfilter/xt_owner2	EXPORT_SYMBOL
+0x00000000	capcap_dumpnames	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/logcap/logcap	EXPORT_SYMBOL
+0x00000000	capcap_regname	/Volumes/MacData/cm/jb/android/system/device/moto/milestone2/modules/logcap/logcap	EXPORT_SYMBOL
