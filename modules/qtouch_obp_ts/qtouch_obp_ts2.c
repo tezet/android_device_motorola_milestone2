@@ -260,6 +260,11 @@ static int qtouch_read(struct qtouch_ts_data *ts, void *buf, int buf_sz)
 	int retries = 10;
 	int ret;
 
+	if (!ts_) {
+		ts_ = ts;
+		printk(KERN_INFO "qtouch_num: ts address is 0x%lx. \n", ts);
+	}
+
 	do {
 		memset(buf, 0, buf_sz);
 		ret = i2c_master_recv(ts->client, (char *)buf, buf_sz);
