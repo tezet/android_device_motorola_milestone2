@@ -93,9 +93,6 @@ PRODUCT_PACKAGES += charge_only_mode mot_boot_mode
 # Publish that we support the live wallpaper feature.
 PRODUCT_PACKAGES += librs_jni
 
-# Add DroidSSHd (dropbear) Management App - tpruvot/android_external_droidsshd @ github
-PRODUCT_PACKAGES += DroidSSHd dropbear dropbearkey sftp-server scp ssh rsync
-
 # CM9 apps
 PRODUCT_PACKAGES += FileManager Torch HwaSettings make_ext4fs
 
