@@ -35,7 +35,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.dexopt-data-only=1 \
 	ro.vold.umsdirtyratio=20 \
 	net.dns1=8.8.8.8 \
-	net.dns2=8.8.4.4
+	net.dns2=8.8.4.4 \
+	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=A953 \
+	ro.media.capture.maxres=5m \
+	ro.media.capture.flash=led \
+	ro.media.capture.flashIntensity=41 \
+	ro.media.capture.torchIntensity=25 \
+	ro.media.capture.classification=classE \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
