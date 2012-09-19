@@ -337,8 +337,5 @@ ICS -->
         <item>"CAR"</item>
         <item>"DESK"</item>
     </string-array>
-
-    <!-- CRT-off animation if false, fade off if true -->
-    <bool name="config_animateScreenLights">false</bool>
-
+    
 </resources>
