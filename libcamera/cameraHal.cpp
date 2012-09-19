@@ -103,8 +103,8 @@ const unsigned int HARD_DROP_THRESHOLD = 15;
 /* The following values (in nsecs) are used to limit the preview framerate
    to reduce the CPU usage. */
 
-const int MIN_PREVIEW_FRAME_INTERVAL = 0;
-const int MIN_PREVIEW_FRAME_INTERVAL_THROTTLED = 0;
+const int MIN_PREVIEW_FRAME_INTERVAL = 90000000;
+const int MIN_PREVIEW_FRAME_INTERVAL_THROTTLED = 90000000;
 
 /** camera_hw_device implementation **/
 static inline struct legacy_camera_device * to_lcdev(struct camera_device *dev)
