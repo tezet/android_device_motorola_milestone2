@@ -10,13 +10,17 @@
     <add-resource type="string" name="keyboard_layout_azerty_label"></add-resource>
     <string name="keyboard_layout_azerty_label">AZERTY</string>
 
-    <!-- QWERTY keyboard layout label. [CHAR LIMIT=35] -->
+    <!-- QWERTY-UK keyboard layout label. [CHAR LIMIT=35] -->
     <add-resource type="string" name="keyboard_layout_qwerty_uk_label"></add-resource>
     <string name="keyboard_layout_qwerty_uk_label">QWERTY-UK</string>
     
-    <!-- QWERTY keyboard layout label. [CHAR LIMIT=35] -->
+    <!-- QWERTY-US keyboard layout label. [CHAR LIMIT=35] -->
     <add-resource type="string" name="keyboard_layout_qwerty_us_label"></add-resource>
     <string name="keyboard_layout_qwerty_us_label">QWERTY-US</string>
+
+    <!-- QWERTY-polish keyboard layout label. [CHAR LIMIT=35] -->
+    <add-resource type="string" name="keyboard_layout_qwerty_pl_label"></add-resource>
+    <string name="keyboard_layout_qwerty_pl_label">QWERTY-polish</string>
 
     <!-- QWERTZ keyboard layout label. [CHAR LIMIT=35] -->
     <add-resource type="string" name="keyboard_layout_qwertz_label"></add-resource>
