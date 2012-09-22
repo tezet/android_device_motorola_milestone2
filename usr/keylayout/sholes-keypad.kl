@@ -85,7 +85,7 @@ key 139   MENU              WAKE_DROPPED
 key 150   EXPLORER
 key 155   ENVELOPE
 key 158   BACK              WAKE_DROPPED
-key 167   MEDIA_RECORD
+key 167   CTRL_LEFT
 key 211   FOCUS
 key 212   CAMERA
 key 215   AT
