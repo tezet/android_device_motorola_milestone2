@@ -19,4 +19,8 @@
     <keyboard-layout android:name="keyboard_layout_qwertz"
             android:label="@string/keyboard_layout_qwertz_label"
             android:keyboardLayout="@raw/keyboard_layout_qwertz" />
+            
+    <keyboard-layout android:name="keyboard_layout_hebrew"
+            android:label="@string/keyboard_layout_hebrew_label"
+            android:keyboardLayout="@raw/keyboard_layout_heb" />
 </keyboard-layouts>

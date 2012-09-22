@@ -25,4 +25,8 @@
     <!-- QWERTZ keyboard layout label. [CHAR LIMIT=35] -->
     <add-resource type="string" name="keyboard_layout_qwertz_label"></add-resource>
     <string name="keyboard_layout_qwertz_label">QWERTZ</string>
+    
+    <!-- Hebrew keyboard layout label. [CHAR LIMIT=35] -->
+    <add-resource type="string" name="keyboard_layout_hebrew_label"></add-resource>
+    <string name="keyboard_layout_hebrew_label">Hebrew</string>
 </resources>

@@ -1,0 +1,335 @@
+# Copyright (C) 2012 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# Hebrew QWERTY keyboard layout.
+# For Motorola Milestone 2
+#
+
+type OVERLAY
+
+key A { 
+	label: '\u05E9'
+	number: '!'
+	base: '\u05E9'
+	shift, capslock: 'A'
+	alt, numlock: '!'
+	shift+alt: '!'
+	ctrl, meta: none
+}
+key B { 
+	label: '\u05E0'
+	number: '+'
+	base: '\u05E0'
+	shift, capslock: 'B'
+	alt, numlock: '+'
+	shift+alt: '+'
+	ctrl, meta: none
+}
+key C { 
+	label: '\u05D1'
+	number: '_'
+	base: '\u05D1'
+	shift, capslock: 'C'
+	alt, numlock: '_'
+	shift+alt: '_'
+	ctrl, meta: none
+}
+key D { 
+	label: '\u05D2'
+	number: '$'
+	base: '\u05D2'
+	shift, capslock: 'D'
+	alt, numlock: '$'
+	shift+alt: '$'
+	ctrl, meta: none
+}
+key E { 
+	label: '\u05E7'
+	number: '3'
+	base: '\u05E7'
+	shift, capslock: 'E'
+	alt, numlock: '3'
+	shift+alt: '3'
+	ctrl, meta: none
+}
+key F { 
+	label: '\u05DB'
+	number: '%'
+	base: '\u05DB'
+	shift, capslock: 'F'
+	alt, numlock: '%'
+	shift+alt: '%'
+	ctrl, meta: none
+}
+key G { 
+	label: '\u05E2'
+	number: '='
+	base: '\u05E2'
+	shift, capslock: 'G'
+	alt, numlock: '='
+	shift+alt: '='
+	ctrl, meta: none
+}
+key H { 
+	label: '\u05D9'
+	number: '&'
+	base: '\u05D9'
+	shift, capslock: 'H'
+	alt, numlock: '&'
+	shift+alt: '&'
+	ctrl, meta: none
+}
+key I { 
+	label: '\u05DF'
+	number: '8'
+	base: '\u05DF'
+	shift, capslock: 'I'
+	alt, numlock: '8'
+	shift+alt: '8'
+	ctrl, meta: none
+}
+key J { 
+	label: '\u05D7'
+	number: '*'
+	base: '\u05D7'
+	shift, capslock: 'J'
+	alt, numlock: '*'
+	shift+alt: '*'
+	ctrl, meta: none
+}
+key K { 
+	label: '\u05DC'
+	number: '('
+	base: '\u05DC'
+	shift, capslock: 'K'
+	alt, numlock: '('
+	shift+alt: '('
+	ctrl, meta: none
+}
+key L { 
+	label: '\u05DA'
+	number: ')'
+	base: '\u05DA'
+	shift, capslock: 'L'
+	alt, numlock: ')'
+	shift+alt: ')'
+	ctrl, meta: none
+}
+key M { 
+	label: '\u05E6'
+	number: '\''
+	base: '\u05E6'
+	shift, capslock: 'M'
+	alt, numlock: '\''
+	shift+alt: '\''
+	ctrl, meta: none
+}
+key N { 
+	label: '\u05DE'
+	number: '"'
+	base: '\u05DE'
+	shift, capslock: 'N'
+	alt, numlock: '"'
+	shift+alt: '"'
+	ctrl, meta: none
+}
+key O { 
+	label: '\u05DD'
+	number: '9'
+	base: '\u05DD'
+	shift, capslock: 'O'
+	alt, numlock: '9'
+	shift+alt: '9'
+	ctrl, meta: none
+}
+key P { 
+	label: '\u05E4'
+	number: '0'
+	base: '\u05E4'
+	shift, capslock: 'P'
+	alt, numlock: '0'
+	shift+alt: '0'
+	ctrl, meta: none
+}
+key Q { 
+	label: '\u05E5'
+	number: '1'
+	base: '\u05E5'
+	shift, capslock: 'Q'
+	alt, numlock: '1'
+	shift+alt: '1'
+	ctrl, meta: none
+}
+key R { 
+	label: '\u05E8'
+	number: '4'
+	base: '\u05E8'
+	shift, capslock: 'R'
+	alt, numlock: '4'
+	shift+alt: '4'
+	ctrl, meta: none
+}
+key S { 
+	label: '\u05D3'
+	number: '#'
+	base: '\u05D3'
+	shift, capslock: 'S'
+	alt, numlock: '#'
+	shift+alt: '#'
+	ctrl, meta: none
+}
+key T { 
+	label: '\u05D0'
+	number: '5'
+	base: '\u05D0'
+	shift, capslock: 'T'
+	alt, numlock: '5'
+	shift+alt: '5'
+	ctrl, meta: none
+}
+key U { 
+	label: '\u05D5'
+	number: '7'
+	base: '\u05D5'
+	shift, capslock: 'U'
+	alt, numlock: '7'
+	shift+alt: '7'
+	ctrl, meta: none
+}
+key V { 
+	label: '\u05D4'
+	number: '-'
+	base: '\u05D4'
+	shift, capslock: 'V'
+	alt, numlock: '-'
+	shift+alt: '-'
+	ctrl, meta: none
+}
+key W { 
+	label: '\u05E3'
+	number: '2'
+	base: '\u05E3'
+	shift, capslock: 'W'
+	alt, numlock: '2'
+	shift+alt: '2'
+	ctrl, meta: none
+}
+key X { 
+	label: '\u05E1'
+	number: '>'
+	base: '\u05E1'
+	shift, capslock: 'X'
+	alt, numlock: '>'
+	shift+alt: '>'
+	ctrl, meta: none
+}
+key Y { 
+	label: '\u05D8'
+	number: '6'
+	base: '\u05D8'
+	shift, capslock: 'Y'
+	alt, numlock: '6'
+	shift+alt: '6'
+	ctrl, meta: none
+}
+key Z { 
+	label: '\u05D6'
+	number: '<'
+	base: '\u05D6'
+	shift, capslock: 'Z'
+	alt, numlock: '<'
+	shift+alt: '<'
+	ctrl, meta: none
+}
+key COMMA { 
+	label: '\u05EA'
+	number: ','
+	base: '\u05EA'
+	shift, capslock: ','
+	alt, numlock: ';'
+	shift+alt: ';'
+	ctrl, meta: none
+}
+key PERIOD { 
+	label: '.'
+	number: ','
+	base: '.'
+	shift, capslock: ','
+	alt, numlock: ':'
+	shift+alt: ':'
+	ctrl, meta: none
+}
+key POUND { 
+	label: '\u20ac' 
+	number: '~'
+	base: '\u20ac'  
+	shift, capslock: '\u20ac'
+	alt, numlock: '~'
+	shift+alt: '~'
+	ctrl, meta: none
+}
+key SPACE { 
+	label: ' '
+	number: ' ' 
+	base: ' '
+	shift, capslock: ' '
+	alt, numlock: '\uEF01' 
+	shift+alt: '\uEF01' 
+	ctrl, meta: none
+}
+key ENTER { 
+    label: '\n'
+    base:  '\n'
+    ctrl, alt, numlock, capslock, meta: none
+}
+key GRAVE { 
+	label: '`'
+	number: '`'
+	base: '`'
+	shift, capslock: '~'
+	alt, numlock: '`'
+	shift+alt: '~'
+	ctrl, meta: none
+}
+
+key SEMICOLON { 
+	label: ';'
+	number: ';'
+	base: ';'
+	shift, capslock: ';'
+	alt, numlock: ';'
+	shift+alt: ';'
+	ctrl, meta: none
+}
+
+key SLASH { 
+	label: '/'
+	number: '/'
+	base: '/'
+	shift, capslock: '/'
+	alt, numlock: '?'
+	shift+alt: '?'
+	ctrl, meta: none
+}
+
+key AT { 
+	label: '@'
+	number: '^'
+	base: '@'
+	shift, capslock: '@'
+	alt, numlock: '^'
+	shift+alt: '^'
+	ctrl, meta: none
+}
