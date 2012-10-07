@@ -35,12 +35,14 @@ cp -f $DEVICE_COMMON/updater-script $REPACK/ota/META-INF/com/google/android/upda
 cp -f $DEVICE_TOP/overclock.conf $REPACK/ota/system/bootmenu/config/overclock.conf
 
 # Opensource init binary
-cp -f $DEVICE_OUT/root/init $REPACK/ota/system/bootmenu/2nd-init/init
+#cp -f $DEVICE_OUT/root/init $REPACK/ota/system/bootmenu/2nd-init/init
+
+# Copy kernel & ramdisk
+cp -f $DEVICE_OUT/kernel $REPACK/ota/system/bootmenu/2nd-boot/kern
+cp -f $DEVICE_OUT/ramdisk.img $REPACK/ota/system/bootmenu/2nd-boot/ramdisk
 
 # Use a prebuilt adbd configured for root access instead of normal one, for dev purpose
 cp -f $REPACK/ota/system/bootmenu/binary/adbd $REPACK/ota/system/bin/adbd
-
-cp -f $DEVICE_COMMON/bootmenu/binary/2nd-init $REPACK/ota/system/bootmenu/binary/2nd-init
 
 # use the static busybox as bootmenu shell, and some static utilities
 cp -f $DEVICE_OUT/utilities/busybox $REPACK/ota/system/bootmenu/binary/busybox

@@ -1,53 +1,40 @@
-# import init.mapphone_umts.usb.rc
+on init 
 
-on init
     # change order or library location search
-    export LD_LIBRARY_PATH /system/lib:/vendor/lib
+    export LD_LIBRARY_PATH /system/lib
+    export DSP_PATH /system/lib/dsp
+
+    # mount point of sdcard
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard  0700 root root
+    symlink /mnt/sdcard /sdcard
+
+    #Adb at boot
+    write /dev/usb_device_mode charge_adb
+    write /tmp/usbd_current_state usb_mode_charge_adb
+    chmod 0666 /tmp/usbd_current_state
+    start adbd
+
+
+on post-fs
 
     symlink mmcblk1p21 /dev/block/system
     symlink mmcblk1p24 /dev/block/cache
     symlink mmcblk1p26 /dev/block/userdata
-
-    # note: we use 2nd-init, /system is already mounted
-
-    start pvr_reloader
-
-    #PVR Drivers
 
     # Load kernel modules
     insmod /system/lib/modules/netmux.ko
     insmod /system/lib/modules/netmux_linkdriver.ko
     insmod /system/lib/modules/modem_pm_driver.ko
 
-    insmod /system/lib/modules/ip6_tables.ko
-    insmod /system/lib/modules/ip6table_filter.ko
-    #insmod /system/lib/modules/ip6table_mangle.ko
-    insmod /system/lib/modules/ip6t_REJECT.ko
-    insmod /system/lib/modules/ip6t_LOG.ko
-
-    insmod /system/lib/modules/xt_tcpmss.ko
-    insmod /system/lib/modules/xt_TCPMSS.ko
-    #insmod /system/lib/modules/iptable_mangle.ko
-    insmod /system/lib/modules/xt_multiport.ko
-    insmod /system/lib/modules/xt_quota2.ko
-    insmod /system/lib/modules/xt_owner2.ko
-
-    insmod /system/lib/modules/tun.ko
-
-    insmod /system/lib/modules/symsearch.ko
-    insmod /system/lib/modules/mmcfix.ko
-    insmod /system/lib/modules/usbled.ko
-    insmod /system/lib/modules/clockfix.ko
-    insmod /system/lib/modules/gpiofix.ko
-
-    # maybe later for /data or /cache, need tests
-    # insmod /system/lib/modules/jbd2.ko
-    # insmod /system/lib/modules/ext4.ko
+    # Overclock after 2ndboot.
+    exec /sbin/sh /system/bootmenu/script/overclock.sh
 
 on fs
 
 # Mount mmc partitions
     mkdir /pds 0775 system system
+    mount ext3 /dev/block/mmcblk1p21 /system
     mount ext3 /dev/block/mmcblk1p21 /system ro remount
     mount ext3 /dev/block/mmcblk1p24 /cache nosuid nodev noatime nodiratime barrier=0
     mount ext3 /dev/block/mmcblk1p26 /data nosuid nodev noatime nodiratime barrier=0
@@ -70,9 +57,6 @@ on post-fs
     export HISTFILESIZE 1000
     export ENV /system/etc/profile
 
-# Other global env variables
-    export DSP_PATH /system/lib/dsp
-
 # Mount tmp, we dont have swap, use ramfs which can grow if required
     mkdir /tmp
     mount ramfs ramfs /tmp size=512k relatime
@@ -84,7 +68,6 @@ on post-fs
     chmod 0755 /mnt/asec
     chown root system /mnt/obb
     chmod 0755 /mnt/obb
-    mkdir /data/app-asec 0775
 
 # Configure kernel options
     # Enable automatic power control for EHCI USB IPC
@@ -111,21 +94,14 @@ on post-fs
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
+
 # Tweaks
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
-
-    # module made to emulate sammy usb
-    # insmod /system/lib/modules/android_usb.ko
 
 on post-fs-data
 
     # event in bootmenu (cpu settings & postbootmenu)
     exec /system/bin/logwrapper postbootmenu
-
-    # Enable ADB mode (made in init.d)
-    #write /dev/usb_device_mode charge_adb
-    #write /tmp/usbd_current_state usb_mode_charge_adb
-    #chmod 0666 /tmp/usbd_current_state
 
     mount rootfs rootfs / ro remount
 
@@ -163,6 +139,13 @@ on post-fs-data
     # create dropbear directory
     mkdir /data/dropbear 0755 root shell
 
+    # create the necessary dirs for tpapi 
+    mkdir /pds/security 0770 system system
+    mkdir /data/tpapi 0770 system system
+    mkdir /data/tpapi/etc 0770 system system
+    mkdir /data/tpapi/etc/tpa 0770 system system
+    mkdir /data/tpapi/etc/tpa/persistent 0770 system system
+
     # hwui config folder for process names black list
     mkdir /data/local/hwui.deny
     chown system nobody /data/local/hwui.deny
@@ -176,8 +159,6 @@ on charger
     write /data/simpin lock
     start charge
     stop zygote
-
-on early-boot
 
 on boot
 
@@ -213,7 +194,7 @@ on boot
 
     # Charge only mode services.
     exec /system/bin/mot_boot_mode
-
+ 
 on property:sys.chargeonly.mode=1
     class_reset main
     class_reset late_start
@@ -221,27 +202,6 @@ on property:sys.chargeonly.mode=1
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
-
-# Adb over Network
-on property:service.adb.tcp.port=5555
-    restart adbd
-on property:service.adb.tcp.port=-1
-    restart adbd
-
-on property:persist.sys.usb.config=adb
-    start adbd
-    setprop sys.usb.state $persist.sys.usb.config
-
-on property:persist.sys.usb.config=none
-    stop adbd
-    setprop sys.usb.state $persist.sys.usb.config
-
-on property:service.adb.root=1
-    restart adbd
-
-service pvr_reloader /system/xbin/ash /system/bootmenu/script/pvr.sh
-    oneshot
-    disabled
 
 #TODO: key shortcuts seems buggy in ics
 service reboot_key /system/bin/reboot
@@ -316,14 +276,7 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/mi
     disabled
     oneshot
 
-service hostap_netd /system/bin/hostap -d /data/misc/wifi/hostapd.conf
-    class main
-    group wifi system inet net_admin
-    socket tiap0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
-service hostap_wrapper /system/etc/wifi/hostap_wrapper.sh
+service hostapd_bin /system/etc/wifi/hostap_wrapper.sh
     class main
     group wifi system inet net_admin
     socket tiap0 dgram 660 wifi wifi
@@ -349,7 +302,7 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
     oneshot
 
 # 3D init
-service pvrsrvinit /system/bin/pvrsrvinit
+service pvrsrvctl /system/bin/pvrsrvctl --start --no-module
     class core
     user root
     group root
@@ -366,8 +319,15 @@ service locDrv /system/bin/brcm_guci_drv -config /system/etc/gpsconfig.xml
     user radio
     group radio inet sdcard_rw
 
-service fmradio /system/bin/fmradioserver
+service secclkd /system/bin/secclkd
     class main
-    disabled
     user system
-    group bluetooth net_bt_admin net_raw net_admin misc
+    group system radio
+    oneshot
+
+service panic_daemon /system/bin/panic_daemon
+    class main
+    user radio
+    group log radio system graphics sdcard_rw
+    socket panic_daemon stream 660 radio radio
+    onrestart exec /system/bin/reboot

@@ -7,6 +7,5 @@ if [ -z "$MAX_TOUCH" ]; then
     MAX_TOUCH=2
 fi
 
-# Load the module
-#insmod $MODULE
+#set multitouch number
 echo $MAX_TOUCH > /proc/multitouch/num

@@ -108,16 +108,6 @@ PRODUCT_PACKAGES += OTAUpdateCenter
 # Experimental TI OpenLink
 PRODUCT_PACKAGES += libnl_2 iw
 
-# copy all vendor (motorola) kernel modules to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/milestone2/lib/modules &&  \
-	find vendor/motorola/milestone2/lib/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
-# copy all others kernel modules under the "modules" directory to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d device/moto/milestone2/modules && \
-	find device/moto/milestone2/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
 # Blobs and bootmenu stuff
 $(call inherit-product, device/moto/milestone2/milestone2-blobs.mk)
 $(call inherit-product, device/moto/milestone2/bootmenu/bootmenu.mk)

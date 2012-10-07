@@ -19,6 +19,8 @@ obj-m += qtouch_obp_ts/
 obj-m += pvr/
 obj-m += klogger/
 obj-m += tls/
+obj-m += 2ndboot/
+
 
 # experimental
 #obj-m += ion/

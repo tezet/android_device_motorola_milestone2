@@ -39,11 +39,9 @@ TARGET_BOARD_PLATFORM := omap3
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 TARGET_OMAP3 := true
-COMMON_GLOBAL_CFLAGS += -DTARGET_OMAP3 -DOMAP_COMPAT -DBINDER_COMPAT
 ARCH_ARM_HAVE_TLS_REGISTER := true
+COMMON_GLOBAL_CFLAGS += -DTARGET_OMAP3 -DOMAP_COMPAT -DBINDER_COMPAT
 
 # Wifi related defines
 BOARD_WLAN_DEVICE           := wl1271
@@ -82,8 +80,6 @@ BOARD_HAVE_BLUETOOTH := true
 TARGET_CUSTOM_BLUEDROID := ../../../device/moto/milestone2/bluedroid.c
 
 # Usb Specific
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/moto/milestone2/UsbController.cpp
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 BOARD_MTP_DEVICE := "/dev/mtp"
@@ -128,17 +124,11 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/milestone2/recovery_keys.c
 TARGET_RECOVERY_PRE_COMMAND := "/system/bootmenu/script/reboot_command.sh"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 
-# FM Radio (This method is not compatible, and sucks)
-# BOARD_HAVE_FM_RADIO := true
-# BOARD_FM_DEVICE := wl1271
-# COMMON_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 # Egl Specific
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/moto/milestone2/egl.cfg
-DEFAULT_FB_NUM := 0
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
-BOARD_USES_OVERLAY := true
 ENABLE_WEBGL := true
 COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
 
@@ -146,21 +136,20 @@ COMMON_GLOBAL_CFLAGS += -DSYSTEMUI_PBSIZE_HACK=1
 BOARD_OVERLAY_BASED_CAMERA_HAL := true
 
 # Other..
-#BOARD_USE_LEGACY_TOUCHSCREEN := true
 ENABLE_SENSORS_COMPAT := true
 TARGET_PROXIMITY_SENSOR_LIMIT := 0x1F
 BOARD_USES_AUDIO_LEGACY := true
 BOARD_USES_LEGACY_RIL := true
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USE_KINETO_COMPATIBILITY := true
-TARGET_BOOTANIMATION_PRELOAD := true
-TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_BOOTANIMATION_USE_RGB565 := true
 
 # If kernel sources are present in repo, here is the location
-#TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/moto/milestone2
-#TARGET_KERNEL_CONFIG   := mapphone_milestone2_defconfig
-TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/milestone2/kernel
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/moto/milestone2
+TARGET_KERNEL_CONFIG   := mapphone_defconfig
+#TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/milestone2/kernel
 # Extra : external modules sources
-TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules/prebuilt
+
 
