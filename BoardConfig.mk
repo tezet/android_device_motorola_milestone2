@@ -162,5 +162,5 @@ TARGET_BOOTANIMATION_USE_RGB565 := true
 #TARGET_KERNEL_CONFIG   := mapphone_milestone2_defconfig
 TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/milestone2/kernel
 # Extra : external modules sources
-TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules
+#TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules
 
