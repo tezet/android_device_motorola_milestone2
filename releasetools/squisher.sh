@@ -38,7 +38,7 @@ cp -f $DEVICE_TOP/overclock.conf $REPACK/ota/system/bootmenu/config/overclock.co
 #cp -f $DEVICE_OUT/root/init $REPACK/ota/system/bootmenu/2nd-init/init
 
 # Copy kernel & ramdisk
-cp -f $DEVICE_OUT/kernel $REPACK/ota/system/bootmenu/2nd-boot/kern
+cp -f $DEVICE_OUT/kernel $REPACK/ota/system/bootmenu/2nd-boot/zImage
 cp -f $DEVICE_OUT/ramdisk.img $REPACK/ota/system/bootmenu/2nd-boot/ramdisk
 
 # Use a prebuilt adbd configured for root access instead of normal one, for dev purpose
