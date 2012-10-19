@@ -44,7 +44,6 @@ PRODUCT_COPY_FILES += \
 	$(device_path)/etc/init.d/02baseband:system/etc/init.d/02baseband \
 	$(device_path)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
 	$(device_path)/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
-	$(device_path)/etc/init.d/10zram:system/etc/init.d/10zram \
 	$(device_path)/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
 	$(device_path)/etc/profile:system/etc/profile \
 	$(device_path)/etc/sysctl.conf:system/etc/sysctl.conf \
