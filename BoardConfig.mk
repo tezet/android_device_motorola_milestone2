@@ -154,10 +154,10 @@ API_MAKE := \
 	PROPRIETARY_SDIO=y \
 	KERNEL_DIR=$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
-#ext_modules:
-#	$(API_MAKE) -C $(TARGET_KERNEL_MODULES_EXT) modules
-#	find $(TARGET_KERNEL_MODULES_EXT)/ -name "*.ko" -exec mv {} \
-#		$(KERNEL_MODULES_OUT) \; || true
+ext_modules:
+	$(API_MAKE) -C $(TARGET_KERNEL_MODULES_EXT) modules
+	find $(TARGET_KERNEL_MODULES_EXT)/ -name "*.ko" -exec mv {} \
+		$(KERNEL_MODULES_OUT) \; || true
 
 	#$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/system/wlan/ti/wilink_6_1/platforms/os/linux
 	#$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/system/wlan/ti/WiLink_AP/platforms/os/linux
@@ -179,7 +179,7 @@ TARGET_KERNEL_SOURCE := $(ANDROID_BUILD_TOP)/kernel/moto/milestone2
 TARGET_KERNEL_CONFIG  := mapphone_defconfig
 BOARD_KERNEL_CMDLINE := console=/dev/null mem=498M init=/init ip=off brdrev=P3A omapfb.vram=0:4M
 # Extra : external modules sources
-#TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules/sources/
-TARGET_KERNEL_MODULES :=  hboot
+TARGET_KERNEL_MODULES_EXT := $(ANDROID_BUILD_TOP)/device/moto/milestone2/modules/sources/
+TARGET_KERNEL_MODULES :=  ext_modules hboot
 
 

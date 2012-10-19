@@ -12,7 +12,6 @@ obj-m += mmcfix/
 obj-m += gpiofix/
 obj-m += clockfix/
 obj-m += logcap/
-obj-m += usbled/
 obj-m += netfilter/
 obj-m += thumbee/
 obj-m += qtouch_obp_ts/
