@@ -6,19 +6,19 @@
 obj-m += symsearch/
 obj-m += overclock/
 obj-m += backlight/
-obj-m += debounce/
-obj-m += qtouch_num/
-obj-m += mmcfix/
-obj-m += gpiofix/
-obj-m += clockfix/
-obj-m += logcap/
-obj-m += netfilter/
-obj-m += thumbee/
-obj-m += qtouch_obp_ts/
-obj-m += pvr/
-obj-m += klogger/
+#obj-m += debounce/
+#obj-m += qtouch_num/
+#obj-m += mmcfix/
+#obj-m += gpiofix/
+#obj-m += clockfix/
+#obj-m += logcap/
+#obj-m += netfilter/
+#obj-m += thumbee/
+#obj-m += qtouch_obp_ts/
+#obj-m += pvr/
+#obj-m += klogger/
 obj-m += tls/
-obj-m += 2ndboot/
+obj-m += hbootmod/
 
 
 # experimental
@@ -39,7 +39,7 @@ clean:
 	@cd $(PWD) && git checkout *.ko
 
 
-EXTRA_CFLAGS += -I$(KERNEL_DIR) -DUTS_RELEASE=\\\"2.6.32.9\\\"
+EXTRA_CFLAGS += -I$(KERNEL_DIR)
 
 .PHONY: all
 #######################################################################################
@@ -56,11 +56,4 @@ modules:
 	@find $(PWD) | grep "\\.order$$" | xargs rm -f
 	@find $(PWD) | grep "\\.tmp_versions$$" | xargs rm -rf
 
-device_modules:
-	@echo YOU ARE NOT AT THE GOOD PLACE TO DO THAT ! go to repo root and copy/paste that :
-	@echo
-	@echo croot
-	@echo . build/envsetup.sh
-	@echo bib milestone2
-	@echo make device_modules
 

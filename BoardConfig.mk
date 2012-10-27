@@ -158,6 +158,7 @@ ext_modules:
 	$(API_MAKE) -C $(TARGET_KERNEL_MODULES_EXT) modules
 	find $(TARGET_KERNEL_MODULES_EXT)/ -name "*.ko" -exec mv {} \
 		$(KERNEL_MODULES_OUT) \; || true
+	mv $(KERNEL_MODULES_OUT)/hbootmod.ko $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
 
 	#$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/system/wlan/ti/wilink_6_1/platforms/os/linux
 	#$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/system/wlan/ti/WiLink_AP/platforms/os/linux
@@ -169,9 +170,9 @@ ext_modules:
 hboot:
 	mkdir -p $(PRODUCT_OUT)/system/bootmenu/2nd-boot   
 	echo "$(BOARD_KERNEL_CMDLINE)" > $(PRODUCT_OUT)/system/bootmenu/2nd-boot/cmdline  
-	$(API_MAKE) -C $(ANDROID_BUILD_TOP)/device/moto/milestone2/boot
-	mv $(ANDROID_BUILD_TOP)/device/moto/milestone2/boot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
-	$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/device/moto/milestone2/boot
+	$(API_MAKE) -C $(ANDROID_BUILD_TOP)/device/moto/milestone2/hboot
+	mv $(ANDROID_BUILD_TOP)/device/moto/milestone2/hboot/hboot.bin $(PRODUCT_OUT)/system/bootmenu/2nd-boot/
+	$(API_MAKE) clean -C $(ANDROID_BUILD_TOP)/device/moto/milestone2/hboot
 
 # If kernel sources are present in repo, here is the location
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
