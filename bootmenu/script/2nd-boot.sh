@@ -1,4 +1,4 @@
-#!/sbin/sh
+#!/sbin/busybox ash
 
 ######## BootMenu Script
 ######## Execute [2nd-init] Menu
@@ -8,14 +8,9 @@ source /system/bootmenu/script/_config.sh
 ######## Main Script
 
 toolbox mount -o remount,rw rootfs /
-mount /data
-
 mkdir /2ndboot
 cp -f /system/bootmenu/2nd-boot/* /2ndboot
 chmod 755 /2ndboot/*
-
-#copy boot info into data
-cp -f /proc/bootinfo /data/bootinfo
 
 ## unmount devices
 sync
@@ -29,8 +24,6 @@ umount /data
 
 ## reduce lcd backlight to save battery
 echo 18 > /sys/class/leds/lcd-backlight/brightness
-
-
 
 cd /2ndboot
 
