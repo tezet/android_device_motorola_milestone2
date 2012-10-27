@@ -79,7 +79,14 @@ void reconfigure_emu_uart(uint32_t uart_speed)
 	 * UART_CLOCK_BASE_RATE / speed (i.e 0x1A for 115200 etc.) 
 	 */
 	
-	div = (UART_CLOCK_BASE_RATE / uart_speed) & 0x3FFF;
+	if (uart_speed)
+	{
+		div = (UART_CLOCK_BASE_RATE / uart_speed) & 0x3FFF;
+	}
+	else
+	{
+		div = 0x1A;
+	}
 	dll = div & 0xFF;
 	dlh = (div >> 8) & 0x3F;
 	
@@ -102,18 +109,21 @@ void reconfigure_emu_uart(uint32_t uart_speed)
 	/* Wait for it to be ready */
 	msleep(1);
 
-	/* Test it */
-	__raw_writel('h', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('b', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('t', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('m', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('d', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('!', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('\r', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
-	__raw_writel('\n', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+	if (uart_speed)
+	{
+		/* Test it */
+		__raw_writel('h', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('b', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('t', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('m', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('o', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('d', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('!', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('\r', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+		__raw_writel('\n', MMU_UART3_BASE + 0x00); while ((__raw_readl(MMU_UART3_BASE + 0x44) & 1) != 0);
+	}
 }
 
 int __attribute__((__naked__)) do_branch(void *bootlist, uint32_t bootsize, uint32_t new_ttbl, void *func, 
@@ -280,8 +290,9 @@ int hboot_boot(int handle)
 	if (emu_uart)
 	{
 		activate_emu_uart();
-		reconfigure_emu_uart(emu_uart);
 	}
+	reconfigure_emu_uart(emu_uart);
+
 	/* Disable dss, some defy want it. */
 	disable_dss();
 
