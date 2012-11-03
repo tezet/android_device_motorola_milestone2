@@ -207,6 +207,58 @@ void board_init()
 	while((read32(CM_IDLEST2_CKGEN) & 1) != 0);
 }
 
+#elif BOARD_UMTS_MILESTONE2
+
+/* CMDLINE */
+
+#define DEFAULT_CMDLINE \
+"console=/dev/null mem=498M init=/init ip=off brdrev=P3A omapfb.vram=0:4M "
+
+#define DEFAULT_UART_CMDLINE \
+"console=ttyS2,%un8 mem=498M init=/init ip=off brdrev=P3A omapfb.vram=0:4M "
+
+/* Used registers */
+#define GPTIMER1_BASE						0x48318000
+
+#define CM_CLKEN_PLL_MPU				0x48004904
+#define CM_IDLEST_MPU						0x48004920
+#define CM_IDLEST_PLL_MPU				0x48004924
+#define CM_AUTOIDLE_PLL_MPU			0x48004934
+#define CM_CLKSEL1_PLL_MPU			0x48004940
+#define CM_CLKSEL2_PLL_MPU			0x48004944
+#define CM_CLKSTCTRL_MPU				0x48004948
+#define CM_CLKSTST_MPU					0x4800494C
+
+#define CM_CLKEN_PLL						0x48004D00
+#define CM_CLKEN2_PLL						0x48004D04
+#define CM_IDLEST_CKGEN					0x48004D20
+#define CM_IDLEST2_CKGEN				0x48004D24
+#define CM_AUTOIDLE_PLL					0x48004D30
+#define CM_AUTOIDLE2_PLL				0x48004D34
+#define CM_CLKSEL1_PLL					0x48004D40
+#define CM_CLKSEL2_PLL					0x48004D44
+#define CM_CLKSEL3_PLL					0x48004D48
+#define CM_CLKSEL4_PLL					0x48004D4C
+#define CM_CLKSEL5_PLL					0x48004D50
+#define CM_CLKOUT_CTRL					0x48004D70
+
+/* Get CMDLINE */
+const char *board_get_cmdline()
+{
+	if (!cfg_emu_uart)
+		return DEFAULT_CMDLINE;
+	else
+	{
+		sprintf(cmdline_buffer, DEFAULT_UART_CMDLINE, cfg_emu_uart);
+		return cmdline_buffer;
+	}
+}
+
+void board_init()
+{
+
+}
+
 #else
 
 #error "No board defined!"

@@ -6,7 +6,7 @@ CC := $(CROSS_COMPILE)gcc
 LD := $(CROSS_COMPILE)ld
 OBJCOPY := $(CROSS_COMPILE)objcopy
 
-EXTRA_CFLAGS ?= -DBOARD_UMTS_JORDAN .
+EXTRA_CFLAGS ?= -DBOARD_UMTS_MILESTONE2 .
 CFLAGS := -Os -Wall -Wno-return-type -Wno-main -fno-builtin -fno-stack-protector -march=armv7-a -ffunction-sections -fPIC $(EXTRA_CFLAGS)
 AFLAGS := -D__ASSEMBLY__ -fno-builtin -march=armv7-a -ffunction-sections
 LDFLAGS := -static -nostdlib --gc-sections 

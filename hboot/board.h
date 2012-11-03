@@ -6,7 +6,7 @@ const char *board_get_cmdline();
 
 /* Check defines */
 
-#if BOARD_UMTS_SHOLES || BOARD_UMTS_JORDAN
+#if BOARD_UMTS_SHOLES || BOARD_UMTS_JORDAN || BOARD_UMTS_MILESTONE2
 
 #define BOARD_DEBUG_UART_BASE			0x49020000
 #define BOARD_WDTIMER2_BASE			0x48314000
