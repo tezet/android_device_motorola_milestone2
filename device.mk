@@ -102,9 +102,6 @@ PRODUCT_PACKAGES += librs_jni
 # CM9 apps
 PRODUCT_PACKAGES += FileManager Torch HwaSettings make_ext4fs
 
-# Live wallpapers
-PRODUCT_PACKAGES += LiveWallpapers LiveWallpapersPicker
-
 # OTA Updater
 PRODUCT_PACKAGES += OTAUpdateCenter
 
