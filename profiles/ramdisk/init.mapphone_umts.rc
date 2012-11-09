@@ -322,3 +322,15 @@ service locDrv /system/bin/brcm_guci_drv -config /system/etc/gpsconfig.xml
     user radio
     group radio inet sdcard_rw
 
+service secclkd /system/bin/secclkd
+    class main
+    user system
+    group system radio
+    oneshot
+
+service panic_daemon /system/bin/panic_daemon
+    class main
+    user radio
+    group log radio system graphics sdcard_rw
+    socket panic_daemon stream 660 radio radio
+    onrestart exec /system/bin/reboot
